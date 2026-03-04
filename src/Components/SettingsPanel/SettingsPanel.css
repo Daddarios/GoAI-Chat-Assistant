@@ -1,0 +1,136 @@
+
+/* =========================================
+SETTINGS PANEL — MINIMAL DEV TOOL
+theme.css token uyumlu
+========================================= */
+
+@import url(https://db.onlinewebfonts.com/c/72ee61ab90d985a3bde1853f01b56e6c?family=Montserrat-Alt1+ExtLt);
+
+.settings-panel{
+background: var(--bg-elev-1);
+border:1px solid var(--border);
+border-radius:16px;
+padding:16px;
+margin-bottom:14px;
+
+}
+
+/* grid */
+.settings-grid{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
+/* field */
+.field{
+flex:1;
+min-width:240px;
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+/* label */
+.field label{
+font-size:12px;
+opacity:.6;
+}
+
+/* inputs */
+.field input,
+.field select{
+padding:10px 12px;
+border-radius:10px;
+border:1px solid var(--border);
+background: var(--bg-elev-2);
+color:var(--text);
+font-size:13px;
+transition: border .15s ease, background .15s ease;
+}
+
+/* focus */
+.field input:focus,
+.field select:focus{
+outline:none;
+border-color: var(--border-strong);
+}
+
+/* select arrow fix dark */
+.field select{
+appearance:none;
+}
+
+/* status */
+.status{
+font-size:8px !important;
+color:var(--text-muted);
+margin-top:4px;
+
+text-align: center !important;
+
+}
+
+/* bottom bar */
+.bottom{
+display:flex;
+gap:10px;
+margin-top:14px;
+align-items:center;
+flex-wrap:wrap;
+border-top:1px solid var(--border);
+padding-top:12px;
+}
+
+/* counter */
+.bottom span{
+font-size:12px;
+color:var(--text-muted);
+}
+
+/* buttons minimal */
+.bottom button{
+padding:8px 12px;
+border-radius:8px;
+border:1px solid var(--border);
+background: var(--bg-elev-2);
+color:var(--text);
+font-size:12px;
+cursor:pointer;
+transition:border .15s ease, background .15s ease;
+}
+
+.bottom button:hover{
+border-color: var(--border-strong);
+}
+
+.bottom button:active{
+transform:scale(.98);
+}
+
+.bottom button:disabled{
+opacity:.45;
+cursor:not-allowed;
+}
+
+/* error */
+.error{
+font-size:12px;
+color:#ff6b6b;
+margin-left:6px;
+}
+
+.hd-title{
+  font-family: 'Montserrat-Alt1 ExtLt' !important; /* Font ailesini belirle */
+    font-size: 1.5rem; /* Yazı boyutunu ayarla */
+    text-align:start;
+    color: var(--text); /* Yazı rengini ayarla */
+    margin-bottom: 100px;
+    margin-top: 0px;
+
+}
+.hr-line {
+  border: none; /* Kenarlıkları kaldır */
+  border-top: 1px solid var(--border); /* Üst kenarlık ekle */
+  margin: 8px 0; /* Üst ve alt boşluk ekle */
+}
