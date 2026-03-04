@@ -1,0 +1,332 @@
+/* =========================================================
+CHATBOX.CSS
+Modern AI Chat Layout (UPDATED - token uyumlu + pre/code fix)
+========================================================= */
+
+/* Container */
+.chat-container{
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+
+  overflow-y:auto;
+  scroll-behavior:smooth;
+
+  /* Uzun içeriklerde taşmayı engeller */
+  min-width:0;
+}
+
+/* Message column */
+.chat-box{
+  width:100%;
+  max-width:var(--container-max, 880px);
+
+  display:flex;
+  flex-direction:column;
+
+  gap:var(--s-4,16px);
+
+  padding:
+    var(--s-5,20px)
+    var(--s-4,16px)
+    calc(var(--s-6,28px));
+
+  min-width:0;
+}
+
+/* Message row */
+.msg-row{
+  width:100%;
+  display:flex;
+
+  /* BUBBLE taşma/flex bug fix */
+  min-width:0;
+}
+
+.msg-row.ai{
+  justify-content:flex-start;
+}
+
+.msg-row.user{
+  justify-content:flex-end;
+}
+
+/* Message bubble */
+.msg-bubble{
+  /* En kritik fix: bubble full-width olmasın */
+  width:fit-content;
+  max-width:72%;
+
+  padding:14px 16px;
+  border-radius:14px;
+
+  font-size:15px;
+  line-height:1.6;
+
+  color:var(--text);
+  background:var(--surface-2);
+
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+
+  /* Uzun kelimeler ve kodlar için */
+  word-break:break-word;
+  overflow-wrap:anywhere;
+
+  /* user metinleri için satır koru */
+  white-space:pre-wrap;
+
+  /* flex içinde taşmayı engeller */
+  min-width:0;
+}
+
+/* Assistant bubble */
+.msg-row.ai .msg-bubble{
+  background:var(--surface-2);
+}
+
+/* User bubble */
+.msg-row.user .msg-bubble{
+  max-width:64%;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary-soft, #3b82f6) 60%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--primary, #3b82f6) 30%,
+      transparent
+    );
+
+  color:var(--text);
+}
+
+/* Markdown wrapper */
+.md{
+  width:100%;
+  min-width:0;
+}
+
+/* Paragraph spacing */
+.md p{
+  margin:0 0 var(--s-3,12px);
+}
+
+.md p:last-child{
+  margin-bottom:0;
+}
+
+/* Headings */
+.md h1,
+.md h2,
+.md h3{
+  margin-top:var(--s-3,12px);
+  margin-bottom:var(--s-2,8px);
+  font-weight:600;
+}
+
+/* Lists */
+.md ul,
+.md ol{
+  padding-left:20px;
+  margin:0 0 var(--s-3,12px);
+}
+
+/* Blockquote (opsiyonel ama AI chatlerde iyi durur) */
+.md blockquote{
+  margin:var(--s-3,12px) 0;
+  padding:10px 12px;
+  border-left:3px solid var(--border);
+  background:var(--surface-3);
+  border-radius:10px;
+}
+
+/* Links */
+.md a{
+  color:var(--primary, #3b82f6);
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+
+/* Inline code */
+.md :not(pre) > code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-size:0.9em;
+
+  padding:3px 6px;
+  border-radius:6px;
+
+  background:var(--surface-3);
+  border:1px solid var(--border);
+
+  /* inline code genişliği şişirmesin */
+  white-space:break-spaces;
+}
+
+/* Code blocks
+   highlight.js bazen pre/code'u block + width:100% yapıyor.
+   Aşağıdaki kurallar bubble genişlemesini engeller.
+*/
+.md pre{
+  margin-top:var(--s-3,12px);
+  margin-bottom:0;
+
+  padding:14px;
+  border-radius:12px;
+
+  overflow-x:auto;
+
+  background:
+    color-mix(
+      in srgb,
+      #000 35%,
+      var(--surface-2)
+    );
+
+  border:1px solid var(--border);
+
+  font-size:13px;
+  line-height:1.5;
+
+  /* KRİTİK: bubble taşmasın */
+  max-width:100%;
+  min-width:0;
+}
+
+.md pre code{
+  display:block;
+
+  /* highlight.js override fix */
+  width:auto !important;
+  max-width:100%;
+  min-width:0;
+
+  white-space:pre;
+}
+
+/* Tables (Markdown tablo gelirse) */
+.md table{
+  width:100%;
+  border-collapse:collapse;
+  overflow:hidden;
+  border-radius:12px;
+  border:1px solid var(--border);
+  margin:var(--s-3,12px) 0;
+}
+
+.md th,
+.md td{
+  padding:10px 12px;
+  border-bottom:1px solid var(--border);
+}
+
+.md th{
+  text-align:left;
+  background:var(--surface-3);
+}
+
+/* Files preview */
+.chat-files{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:var(--s-2,8px);
+  margin-bottom:var(--s-2,8px);
+
+  min-width:0;
+}
+
+/* File card */
+.chat-file{
+  width:92px;
+
+  padding:var(--s-2,8px);
+  border-radius:10px;
+
+  background:var(--surface-3);
+  border:1px solid var(--border);
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  gap:6px;
+
+  transition:background .15s ease, border .15s ease, transform .15s ease;
+  cursor:pointer;
+}
+
+.chat-file:hover{
+  background:var(--surface-2);
+  border-color:var(--primary-soft);
+  transform:translateY(-1px);
+}
+
+/* Image preview */
+.chat-img{
+  width:72px;
+  height:72px;
+
+  object-fit:cover;
+  border-radius:8px;
+
+  transition:transform .2s ease;
+}
+
+.chat-img:hover{
+  transform:scale(1.05);
+}
+
+/* File icon */
+.chat-file-icon{
+  width:44px;
+  height:44px;
+
+  border-radius:8px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:12px;
+  font-weight:600;
+
+  background:var(--surface-2);
+  border:1px solid var(--border);
+
+  color:var(--text-muted);
+}
+
+/* File name */
+.chat-file-name{
+  font-size:11px;
+  text-align:center;
+
+  word-break:break-word;
+  overflow-wrap:anywhere;
+
+  color:var(--text-muted);
+}
+
+/* Mobile */
+@media (max-width:720px){
+
+  .chat-box{
+    padding:var(--s-3,12px);
+  }
+
+  .msg-bubble{
+    max-width:88%;
+  }
+
+  .msg-row.user .msg-bubble{
+    max-width:80%;
+  }
+
+}
