@@ -11,7 +11,7 @@ import { PiSidebarLight } from "react-icons/pi";
 
 export default function OpenRouterStreamingChat() {
   const [apiKey, setApiKey] = useState(
-    "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"//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
+    "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"//
   );
   const [model, setModel] = useState("openai/gpt-4o-mini");
   const [systemPrompt, setSystemPrompt] = useState("");

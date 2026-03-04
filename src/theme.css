@@ -4,6 +4,7 @@
    Works with: appShell, topbar, sidebar, scrim,
    centerWrap, chat-container, menuBtn, closeSidebarBtn
    ========================================= */
+@import url('https://db.onlinewebfonts.com/c/72ee61ab90d985a3bde1853f01b56e6c?family=Montserrat-Alt1+ExtLt');
 
 /* --------- CSS Reset (soft) --------- */
 *,
@@ -939,57 +940,81 @@ Sidebar buttons: delete & rename (added icons, classes for styling)
 
 
 
-/* HEADER ANIMATION */
-
-.header-animation{
+/* =========================================
+ANIMATION (theme.css uyumlu)
+========================================= */
+.slider-wrapper{
+  font-family:"Montserrat-Alt1 ExtLt", sans-serif;
+  font-size:10px;
+  margin-right: 40%;
+  color:var(--muted);
   display:flex;
   align-items:center;
+  justify-content:center;
+  gap:1px;
+  text-transform:uppercase;
+  
+  margin-top: -40px !important;
+  margin-bottom: -10px !important;
+}
 
-  font-size:14px;
-  font-weight:500;
+/* visible window */
 
-  height:90px; 
+.slider{
+  height:34px;
   overflow:hidden;
-
-  color:var(--text-muted);
+  position:relative;
+  color:var(--accent) ;
 }
 
-.anim-static{
-  margin-right:6px;
+/* words */
+
+.slider div{
+  height:34px;
+  line-height:34px;
+  padding:0 10px;
+  border-radius:8px;
+  font-weight:600;
+
+  display:block;
 }
 
-.anim-list{
-  list-style:none;
-  margin:0;
-  padding:0;
+/* animation container */
 
-  animation: headerChange 10s infinite;
+.slider-text-1{
+  animation: slide 10s cubic-bezier(.4,0,.2,1) infinite;
 }
 
-.anim-list li{
-  height:20px;
-  line-height:20px;
-}
-@keyframes headerChange{
+/* animation */
 
-  0%,20%{
-    transform:translateY(0);
+@keyframes slide{
+
+  0%{
+    margin-top:0;
   }
 
-  25%,45%{
-    transform:translateY(-20px);
+  30%{
+    margin-top:0;
   }
 
-  50%,70%{
-    transform:translateY(-40px);
+  35%{
+    margin-top:-34px;
   }
 
-  75%,95%{
-    transform:translateY(-60px);
+  65%{
+    margin-top:-34px;
+  }
+
+  70%{
+    margin-top:-68px;
+  }
+
+  95%{
+    margin-top:-68px;
   }
 
   100%{
-    transform:translateY(0);
+    margin-top:0;
   }
 
 }

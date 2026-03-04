@@ -1,9 +1,8 @@
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const FREE_MODELS = [
   "nvidia/nemotron-nano-9b-v2:free",
-  "deepseek/deepseek-chat:free",
   "qwen/qwen2.5-7b-instruct:free",
-  "meta-llama/llama-3.1-8b-instruct:free"
+  "openai/gpt-3.5-turbo:free"
 ];
 
 function sleep(ms){
