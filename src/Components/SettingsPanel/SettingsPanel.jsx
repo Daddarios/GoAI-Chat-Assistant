@@ -32,27 +32,21 @@ export default function SettingsPanel({
 
   return (
     <div className="settingsPanel">
-      <h2 className="hd-title">
-        Go -  ÆI
-      
-      
-      </h2>
-      <div className="header-animation">
-
-  <span className="anim-static">
-    AI for
-  </span>
-
-  <ul className="anim-list">
-    <li>developers</li>
-    <li>creators</li>
-    <li>builders</li>
-    <li>everyone</li>
-  </ul>
-
-</div>
+      <h2 className="hd-title"> Go - ÆI </h2>
+        
+   <div class="slider-wrapper">
+        Alles für
+        <div class="slider">
+          <div class="slider-text-1">neue Ideen</div>
+          <div class="slider-text-2">smarten Code</div>
+          <div class="slider-text-3">kreative Lösungen</div>
+          <div class="slider-text-4">AI Unterstützung</div>
+          <div class="slider-text-5">digitale Zukunft</div>
+        </div>
+      </div>
      
    <hr className="hr-line"/>
+   <br />
    
         {/* yeni Sohbet */}
         <div>
@@ -74,18 +68,20 @@ export default function SettingsPanel({
         <div className="field">
           <label>Model</label>
           <select className="slct" value={model} onChange={(e)=>setModel(e.target.value)}>
-                <option value="openai/gpt-4o-mini">gpt-4o-mini</option>
-
-                <option value="deepseek/deepseek-chat:free">deepseek free</option>
-                <option value="qwen/qwen3-coder:free">qwen coder</option>
+                <option value="openai/gpt-3.5">GPT-3.5</option>
 
                 <option value="nvidia/nemotron-nano-9b-v2:free">
                   NVIDIA Nemotron FREE
                 </option>
 
-                <option value="meta-llama/llama-3.1-8b-instruct:free">
-                  llama free
-                </option>
+                  <option value="deepseek/deepseek-r1:free">
+                    DeepSeek R1 FREE
+                  </option>
+
+                  <option value="zhipu/glm-4.5-air:free">
+                    GLM-4.5 Air FREE
+                  </option>
+                
           </select>
 
           
