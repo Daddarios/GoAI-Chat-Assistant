@@ -834,7 +834,7 @@ Sidebar buttons: delete & rename (added icons, classes for styling)
 
   gap:1px;
 
-  padding:16px 1px;
+  padding:4px 1px;
 
   border-radius:8px;
 }
@@ -1017,4 +1017,84 @@ ANIMATION (theme.css uyumlu)
     margin-top:0;
   }
 
+}
+
+/* HISTORY HEADER */
+
+.historyHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+margin-bottom:6px;
+}
+
+/* CHEVRON */
+
+.chevron{
+transition:transform .3s ease;
+font-size:18px;
+}
+
+.chevron.rotate{
+transform:rotate(180deg);
+}
+
+/* HISTORY CONTAINER */
+
+.historyContainer{
+max-height:0;
+overflow:hidden;
+transition:max-height .35s ease;
+}
+
+.historyContainer.open{
+max-height:600px;
+overflow:auto;
+}
+
+/* CHAT ITEM */
+
+.chatItem{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:6px 8px;
+border-radius:6px;
+transition:background .2s;
+}
+
+.chatItem:hover{
+background:#2a2a2a;
+}
+
+/* CHAT TITLE */
+
+.chatTitle{
+cursor:pointer;
+flex:1;
+}
+
+/* ACTION BUTTONS */
+
+.chatActions{
+display:flex;
+gap:6px;
+opacity:0;
+transition:opacity .2s;
+}
+
+.chatItem:hover .chatActions{
+opacity:1;
+}
+
+.chatActions button{
+background:none;
+border:none;
+cursor:pointer;
+color:#ccc;
+}
+
+.chatActions button:hover{
+color:white;
 }
