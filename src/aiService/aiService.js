@@ -159,6 +159,6 @@ export async function sendStreamingRequest({
     }
   }
 
-  throw new Error("Beklenmeyen hata");
+  throw new Error("Fehler !");
 }
 

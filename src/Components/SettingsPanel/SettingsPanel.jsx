@@ -3,9 +3,8 @@ import { AiOutlineClear, AiOutlineClose } from "react-icons/ai";
 import { BsStopCircle } from "react-icons/bs";
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
-
-
-
+import { FiChevronDown } from "react-icons/fi";
+import { useState } from "react";
 
 export default function SettingsPanel({
   apiKey,
@@ -27,125 +26,161 @@ export default function SettingsPanel({
   loadChat,
   deleteChat,
   renameChat
-  
 }) {
 
-  return (
-    <div className="settingsPanel">
-      <h2 className="hd-title"> Go - ÆI </h2>
-        
-   <div class="slider-wrapper">
-        Alles für
-        <div class="slider">
-          <div class="slider-text-1">neue Ideen</div>
-          <div class="slider-text-2">smarten Code</div>
-          <div class="slider-text-3">kreative Lösungen</div>
-          <div class="slider-text-4">AI Unterstützung</div>
-          <div class="slider-text-5">digitale Zukunft</div>
-        </div>
-      </div>
-     
-   <hr className="hr-line"/>
-   <br />
-   
-        {/* yeni Sohbet */}
-        <div>
-          <button className="btnnwchat" onClick={newChat}title="Start Chat">
+const [openHistory, setOpenHistory] = useState(true);
 
-          <HiOutlinePencilSquare />
-          <span>Start Chat</span>
-          </button>
-          
-        </div>
-        <br />
-        
-      <div className="settings-grid">
+return (
+<div className="settingsPanel">
 
- 
+<h2 className="hd-title">Go - ÆI</h2>
 
-    
-        {/* MODEL */}
-        <div className="field">
-          <label>Model</label>
-          <select className="slct" value={model} onChange={(e)=>setModel(e.target.value)}>
-                <option value="openai/gpt-3.5">GPT-3.5</option>
+<div className="slider-wrapper">
+Alles für
+<div className="slider">
+<div className="slider-text-1">neue Ideen</div>
+<div className="slider-text-2">smarten Code</div>
+<div className="slider-text-3">kreative Lösungen</div>
+<div className="slider-text-4">AI Unterstützung</div>
+<div className="slider-text-5">digitale Zukunft</div>
+</div>
+</div>
 
-                <option value="nvidia/nemotron-nano-9b-v2:free">
-                  NVIDIA Nemotron FREE
-                </option>
+<hr className="hr-line"/>
+<br/>
 
-                  <option value="deepseek/deepseek-r1:free">
-                    DeepSeek R1 FREE
-                  </option>
+{/* START CHAT */}
 
-                  <option value="zhipu/glm-4.5-air:free">
-                    GLM-4.5 Air FREE
-                  </option>
-                
-          </select>
+<button className="btnnwchat" onClick={newChat} title="Start Chat">
+<HiOutlinePencilSquare />
+<span>Start Chat</span>
+</button>
 
-          
-        </div>
-        
-        {/* SYSTEM PROMPT */}
-        <div className="field">
-          <label>System Prompt</label>
-          <input
-            value={systemPrompt}
-            onChange={(e)=>setSystemPrompt(e.target.value)}
-            placeholder="Kısa ve net cevap ver"
-          />
-        </div>
+<br/>
 
-      </div>
+<div className="settings-grid">
 
-      {/* ALT BUTONLAR */}
-      <div className="bottom">
+{/* MODEL */}
 
-        <span>Mesaj: {messages.length}</span>
+<div className="field">
+<label>Model</label>
 
-        <button onClick={clearChat} disabled={isSending}>
-          <AiOutlineClear />
-        </button>
+<select
+className="slct"
+value={model}
+onChange={(e)=>setModel(e.target.value)}
+>
 
-        <button onClick={stop} disabled={!isSending}>
-          <BsStopCircle />
-        </button>
-        
+<option value="openai/gpt-3.5">GPT-3.5</option>
 
-           {/* THEME BUTTON */}
-       
-        {error && <span className="error">Hata: {error}</span>}
-        
+<option value="nvidia/nemotron-nano-9b-v2:free">
+NVIDIA Nemotron FREE
+</option>
 
-     
+<option value="deepseek/deepseek-r1:free">
+DeepSeek R1 FREE
+</option>
 
-      </div>
-      
-      
-      <br />
+<option value="zhipu/glm-4.5-air:free">
+GLM-4.5 Air FREE
+</option>
 
-       <div>
-        <h4>Chat History</h4>
-         {chats.map(chat => (
-        <div key={chat.id} className="chatItem">
+</select>
+</div>
 
-          <span onClick={() => loadChat(chat)}>
-            {chat.title}
-          </span>
+{/* SYSTEM PROMPT */}
 
-          <button className="btnclose" onClick={() => deleteChat(chat.id)} title="Delete Chat">
-            <AiOutlineClose />
-          </button>
-          
-          <button className="btnrename" onClick={() => renameChat(chat.id)} title="Rename Chat">
-            <PiPencilSimpleLine />
-          </button>
+<div className="field">
+<label>System Prompt</label>
 
-        </div>
+<input
+value={systemPrompt}
+onChange={(e)=>setSystemPrompt(e.target.value)}
+placeholder="Kısa ve net cevap ver"
+/>
+
+</div>
+
+</div>
+
+{/* ALT BUTONLAR */}
+
+<div className="bottom">
+
+<span>Gespräche: {messages.length}</span>
+
+<button onClick={clearChat} disabled={isSending}>
+<AiOutlineClear />
+</button>
+
+<button onClick={stop} disabled={!isSending}>
+<BsStopCircle />
+</button>
+
+{error && <span className="error">Fehler: {error}</span>}
+
+</div>
+
+<br/>
+
+{/* CHAT HISTORY */}
+
+<div
+className="historyHeader"
+onClick={() => setOpenHistory(!openHistory)}
+>
+
+<h4>Chat History</h4>
+
+<FiChevronDown
+className={`chevron ${openHistory ? "rotate" : ""}`}
+/>
+
+</div>
+
+<div className={`historyContainer ${openHistory ? "open" : ""}`}>
+
+{chats?.map(chat => (
+
+<div key={chat.id} className="chatItem">
+
+<span
+className="chatTitle"
+onClick={() => loadChat(chat)}
+>
+{chat.title}
+</span>
+
+<div className="chatActions">
+
+<button
+className="btnrename"
+onClick={() => renameChat(chat.id)}
+title="Rename Chat"
+>
+
+<PiPencilSimpleLine />
+
+</button>
+
+<button
+className="btnclose"
+onClick={() => deleteChat(chat.id)}
+title="Delete Chat"
+>
+
+<AiOutlineClose />
+
+</button>
+
+</div>
+
+</div>
+
 ))}
-      </div>
-     
-    </div>
-  );
-} 
+
+</div>
+
+</div>
+);
+}

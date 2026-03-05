@@ -250,13 +250,13 @@ function deleteChat(id) {
         },
       });
     } catch (e) {
-      const msg = e?.message || "Hata";
+      const msg = e?.message || "Fehler";
 
       setMessages((prev) => {
         const next = [...prev];
         for (let i = next.length - 1; i >= 0; i--) {
           if (next[i].role === "assistant") {
-            next[i] = { role: "assistant", content: "Hata: " + msg };
+            next[i] = { role: "assistant", content: "Fehler: " + msg };
             break;
           }
         }
@@ -264,7 +264,7 @@ function deleteChat(id) {
       });
 
       setError(msg);
-      setStatus("Hata");
+      setStatus("Fehler");
     } finally {
       setIsSending(false);
       abortRef.current = null;
