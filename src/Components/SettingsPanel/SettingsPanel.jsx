@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function SettingsPanel({
   apiKey,
-  setApiKey,
+ 
   model,
   setModel,
   systemPrompt,
@@ -19,7 +19,7 @@ export default function SettingsPanel({
   stop,
   toggleTheme,
   isSending,
-  toggleSidebar,
+
   error,
   newChat,
   chats,

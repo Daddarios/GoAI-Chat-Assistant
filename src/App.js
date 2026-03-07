@@ -10,10 +10,9 @@ import "./theme.css";
 import { PiSidebarLight } from "react-icons/pi";
 
 export default function OpenRouterStreamingChat() {
-  const [apiKey, setApiKey] = useState(
-    "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"//
-  );
+ 
   const [model, setModel] = useState("openai/gpt-4o-mini");
+  const [apiKey, setApiKey] = useState(""); // <-- ekle
   const [systemPrompt, setSystemPrompt] = useState("");
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -24,7 +23,7 @@ export default function OpenRouterStreamingChat() {
   const saved = localStorage.getItem("chat_history");
   return saved ? JSON.parse(saved) : [];
 });
-  const [,  setActiveChatId] = useState(null);
+  const [activeChatId,setActiveChatId] = useState(null);
   
 
   // ✅ Sidebar state (ChatGPT-like)
@@ -101,9 +100,8 @@ useEffect(() => {
   const canSend = useMemo(() => {
     const hasText = input.trim().length > 0;
     const hasFiles = pendingFiles.length > 0;
-    const hasKey = apiKey && apiKey.trim().length > 0;
-    return hasKey && (hasText || hasFiles) && !isSending;
-  }, [apiKey, input, pendingFiles, isSending]);
+    return (hasText || hasFiles) && !isSending;
+  }, [input, pendingFiles, isSending]);
 
   function clearChat() {
     setMessages([]);
@@ -213,62 +211,52 @@ function deleteChat(id) {
     let fullText = "";
 
     try {
-      await sendStreamingRequest({
-        apiKey,
-        model,
-        systemPrompt,
-        messages,
-
-        userText: fileBlocks.length
-          ? [
-              {
-                type: "text",
-                text: text?.length
-                  ? text
-                  : "Bu dosyayı analiz et ve hafızanda tut.",
-              },
-              ...fileBlocks,
-            ]
-          : text,
-
+    const response = await fetch("http://localhost:3001/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            model,
+            systemPrompt,
+            messages,
+            userText: fileBlocks.length
+                ? [
+                    { type: "text", text: text?.length ? text : "Bu dosyayı analiz et ve hafızanda tut." },
+                    ...fileBlocks
+                  ]
+                : text,
+        }),
         signal: controller.signal,
+    });
 
-        onToken: (token) => {
-          fullText += token;
+    const data = await response.json();
 
-          setMessages((prev) => {
-            const next = [...prev];
-            const cur = next[assistantIndex];
-            if (!cur) return prev;
+    console.log("Backend response:", data); // ← Bunu ekle, terminalde cevabı gör
 
-            next[assistantIndex] = {
-              ...cur,
-              content: fullText,
-            };
-            return next;
-          });
-        },
-      });
-    } catch (e) {
-      const msg = e?.message || "Fehler";
+    const assistantMessage = data.choices?.[0]?.message?.content || "No responses";
 
-      setMessages((prev) => {
+    setMessages((prev) => {
+        const next = [...prev];
+        next[assistantIndex] = { ...next[assistantIndex], content: assistantMessage };
+        return next;
+    });
+} catch (e) {
+    const msg = e?.message || "Fehler";
+    setMessages((prev) => {
         const next = [...prev];
         for (let i = next.length - 1; i >= 0; i--) {
-          if (next[i].role === "assistant") {
-            next[i] = { role: "assistant", content: "Fehler: " + msg };
-            break;
-          }
+            if (next[i].role === "assistant") {
+                next[i] = { role: "assistant", content: "Fehler: " + msg };
+                break;
+            }
         }
         return next;
-      });
-
-      setError(msg);
-      setStatus("Fehler");
-    } finally {
-      setIsSending(false);
-      abortRef.current = null;
-    }
+    });
+    setError(msg);
+    setStatus("Fehler");
+} finally {
+    setIsSending(false);
+    abortRef.current = null;
+}
   }
 
   function addFiles(files) {
