@@ -1,5 +1,7 @@
 import { useRef, useEffect } from "react";
-import { BsPlusSquareDotted } from "react-icons/bs";
+import { AiOutlineSend } from "react-icons/ai";
+import { BsPlusSquareDotted, BsStopFill } from "react-icons/bs";
+
 
 export default function InputArea({
   input,
@@ -7,6 +9,7 @@ export default function InputArea({
   onSend,
   onKeyDown,
   canSend,
+  stop,
   isSending,
   onFilesSelected,
   selectedFiles = [],
@@ -107,11 +110,14 @@ export default function InputArea({
 
             <button
               type="button"
-              className="sendBtn"
-              onClick={onSend}
-              disabled={!canSend}
+              className={`sendBtn ${isSending ? "stopMode" : ""}`} 
+              onClick={isSending ? stop : onSend} 
+              disabled={!isSending && !canSend}  
+              
             >
-              {isSending ? "..." : "↑"}
+
+                {isSending ? <BsStopFill size={16} className="stop-icon"/> : <AiOutlineSend size={16} />} 
+              
             </button>
 
           </div>

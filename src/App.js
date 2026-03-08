@@ -3,7 +3,7 @@ import Header from "./Components/Header/Header";
 import SettingsPanel from "./Components/SettingsPanel/SettingsPanel";
 import ChatBox from "./Components/ChatBox/ChatBox";
 import InputArea from "./Components/InputArea/InputArea";
-import { sendStreamingRequest } from "./aiService/aiService";
+
 import { GoSidebarExpand } from "react-icons/go";
 
 import "./theme.css";
@@ -11,7 +11,7 @@ import { PiSidebarLight } from "react-icons/pi";
 
 export default function OpenRouterStreamingChat() {
  
-  const [model, setModel] = useState("openai/gpt-4o-mini");
+  const [model, setModel] = useState("nvidia/nemotron-nano-9b-v2:free");
   const [apiKey, setApiKey] = useState(""); // <-- ekle
   const [systemPrompt, setSystemPrompt] = useState("");
   const [input, setInput] = useState("");
@@ -23,7 +23,7 @@ export default function OpenRouterStreamingChat() {
   const saved = localStorage.getItem("chat_history");
   return saved ? JSON.parse(saved) : [];
 });
-  const [activeChatId,setActiveChatId] = useState(null);
+  //const [activeChatId,setActiveChatId] = useState(null);
   
 
   // ✅ Sidebar state (ChatGPT-like)
@@ -53,7 +53,7 @@ useEffect(() => {
     };
 
     setChats([firstChat]);
-    setActiveChatId(firstChat.id);
+    //setActiveChatId(firstChat.id);
   }
 }, [chats.length]);
 
@@ -165,13 +165,11 @@ function deleteChat(id) {
       })),
     };
 
-    let assistantIndex = -1;
+      const assistantIndex = messages.length + 1;
 
-    setMessages((prev) => {
-      const next = [...prev, userMsg, { role: "assistant", content: "" }];
-      assistantIndex = next.length - 1;
-      return next;
-    });
+      setMessages((prev) => {
+        return [...prev, userMsg, { role: "assistant", content: "" }];
+      });
 
     let fileBlocks = [];
 
@@ -208,7 +206,7 @@ function deleteChat(id) {
     const controller = new AbortController();
     abortRef.current = controller;
 
-    let fullText = "";
+    
 
     try {
     const response = await fetch("http://localhost:3001/chat", {
@@ -381,6 +379,7 @@ function renameChat(id) {
           onFilesSelected={addFiles}
           selectedFiles={pendingFiles}
           onRemoveFile={removeFile}
+          stop={stop}
         />
       </div>
     </div>

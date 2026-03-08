@@ -1,6 +1,6 @@
 import "./SettingsPanel.css";
 import { AiOutlineClear, AiOutlineClose } from "react-icons/ai";
-import { BsStopCircle } from "react-icons/bs";
+
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { FiChevronDown } from "react-icons/fi";
@@ -16,7 +16,7 @@ export default function SettingsPanel({
   status,
   messages,
   clearChat,
-  stop,
+  
   toggleTheme,
   isSending,
 
@@ -63,7 +63,7 @@ Alles für
 {/* MODEL */}
 
 <div className="field">
-<label>Model</label>
+<label>Model Aussuchen</label>
 
 <select
 className="slct"
@@ -71,19 +71,19 @@ value={model}
 onChange={(e)=>setModel(e.target.value)}
 >
 
-<option value="openai/gpt-3.5">GPT-3.5</option>
+
 
 <option value="nvidia/nemotron-nano-9b-v2:free">
 NVIDIA Nemotron FREE
 </option>
 
-<option value="deepseek/deepseek-r1:free">
-DeepSeek R1 FREE
+ <option value="stepfun/step-3.5-flash:free">
+  Step 2.0 Flash FREE
 </option>
 
-<option value="zhipu/glm-4.5-air:free">
-GLM-4.5 Air FREE
-</option>
+  <option value="google/gemma-3-12b-it:free">
+    Google Gemma 3 12B FREE
+  </option>
 
 </select>
 </div>
@@ -91,12 +91,12 @@ GLM-4.5 Air FREE
 {/* SYSTEM PROMPT */}
 
 <div className="field">
-<label>System Prompt</label>
+<label>System Anweisung</label>
 
 <input
 value={systemPrompt}
 onChange={(e)=>setSystemPrompt(e.target.value)}
-placeholder="Kısa ve net cevap ver"
+placeholder="Kurze und klare Antworten geben."
 />
 
 </div>
@@ -113,9 +113,9 @@ placeholder="Kısa ve net cevap ver"
 <AiOutlineClear />
 </button>
 
-<button onClick={stop} disabled={!isSending}>
+{/* <button onClick={stop} disabled={!isSending}>
 <BsStopCircle />
-</button>
+</button> */}
 
 {error && <span className="error">Fehler: {error}</span>}
 
