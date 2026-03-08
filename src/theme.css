@@ -44,7 +44,7 @@ a {
 /* --------- Theme Tokens --------- */
 :root {
   /* Layout */
-  --sidebar-w: 360px;
+  --sidebar-w: 300px;
   --topbar-h: 56px;
 
   --radius-xl: 18px;
@@ -533,8 +533,8 @@ body.dark .slct option {
 
 /* send button */
 .sendBtn {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: var(--accent);
@@ -559,6 +559,19 @@ body.dark .slct option {
 .sendBtn:focus-visible {
   outline: none;
   box-shadow: var(--ring);
+}
+.sendBtn.stopMode {
+  background: #9a2c2a49 !important;
+}
+
+/* Stop ikonu animasyonu */
+.sendBtn svg.stop-icon {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 /* attach button (optional) */
@@ -1046,11 +1059,14 @@ transform:rotate(180deg);
 max-height:0;
 overflow:hidden;
 transition:max-height .35s ease;
+
 }
 
 .historyContainer.open{
-max-height:600px;
+max-height:370px;
+margin-bottom: 10px;
 overflow:auto;
+   
 }
 
 /* CHAT ITEM */
@@ -1097,4 +1113,58 @@ color:#ccc;
 
 .chatActions button:hover{
 color:white;
+}
+
+
+
+/* ═══════════════════════════════════════════════ */
+/* 🤖 Assistant Header - Thinking Göstergesi */
+/* ═══════════════════════════════════════════════ */
+
+.assistant-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.bot-icon {
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.thinking {
+  display: flex;
+  align-items: center;
+  width: 20px !important;
+  height: 10px;
+  margin-top: 1px;
+}
+
+.thinking > div {
+  background: var(--muted-2);
+  height: 2px;
+  width: 5px;
+  margin-right: 1px;
+  animation: loading7 1s infinite ease-in-out;
+  transform: translateY(-3px);
+}
+
+.thinking .dot1 { animation-delay: 0.0s; }
+.thinking .dot2 { animation-delay: 0.08s; }
+.thinking .dot3 { animation-delay: 0.16s; }
+.thinking .dot4 { animation-delay: 0.24s; }
+.thinking .dot5 { animation-delay: 0.32s; }
+.thinking .dot6 { animation-delay: 0.40s; }
+.thinking .dot7 { animation-delay: 0.48s; }
+.thinking .dot8 { animation-delay: 0.56s; }
+.thinking .dot9 { animation-delay: 0.64s; }
+.thinking .dot10 { animation-delay: 0.72s; }
+
+
+@keyframes loading7 {
+  50% {
+    background: var(--accent);
+    transform: translateY(6px);
+  }
 }

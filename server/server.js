@@ -1,60 +1,79 @@
-import express from "express"; // Express bize kolay şekilde server ve API endpoint oluşturma imkanı verir
-import cors from "cors"; // React uygulamasının backend ile konuşabilmesi için CORS'u aktif ediyoruz-CORS olmazsa tarayıcı güvenlik nedeniyle isteği engeller
-import dotenv from "dotenv"; // .env dosyasındaki gizli bilgileri (API key gibi) okumak için kullanılır
-import fetch from "node-fetch"; // Node 18+ ise gerek yok, yoksa ekle
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
 
-dotenv.config(); // .env dosyasını yükler
 
-const app = express(); // Express uygulamasını başlatıyoruz
+dotenv.config();
 
-app.use(cors()); // CORS middleware: frontend → backend iletişimine izin verir
+const app = express();
 
-app.use(express.json()); // (React mesaj gönderdiğinde JSON formatında gelecek)
+app.use(cors());
+app.use(express.json());
 
-const API_KEY = process.env.OPENROUTER_API_KEY; // .env dosyasındaki API key'i alıyoruz
+const API_KEY = process.env.OPENROUTER_API_KEY;
 
-// React'in çağıracağı endpoint
-// React burada POST isteği ile mesaj gönderecek
 app.post("/chat", async (req, res) => {
   try {
-    // OpenRouter AI API'ye request gönderiyoruz
+    // ✅ Frontend'den gelen veriyi ayıkla
+    const { model, systemPrompt, messages, userText } = req.body;
+
+    // ✅ OpenRouter formatında mesaj array'i oluştur
+    const payloadMessages = [];
+
+    // System prompt varsa ekle
+    if (systemPrompt?.trim()) {
+      payloadMessages.push({ role: "system", content: systemPrompt.trim() });
+    }
+
+    // Önceki mesajları ekle
+    for (const m of messages) {
+      if (m.role === "user" || m.role === "assistant") {
+        payloadMessages.push({ role: m.role, content: m.content });
+      }
+    }
+
+    // Yeni user mesajını ekle
+    if (userText) {
+      payloadMessages.push({
+        role: "user",
+        content: typeof userText === "string" ? userText : JSON.stringify(userText)
+      });
+    }
+
+    // ✅ OpenRouter'a doğru formatta gönder
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        // API key burada kullanılıyor (frontend bunu görmez)
         "Authorization": `Bearer ${API_KEY}`,
-        // gönderdiğimiz veri JSON formatında
         "Content-Type": "application/json"
       },
-      // React'ten gelen mesajı aynen AI API'ye gönderiyoruz
-      body: JSON.stringify(req.body)
+      body: JSON.stringify({
+        model,
+        messages: payloadMessages
+      })
     });
 
-    // AI'dan gelen cevabı JSON formatına çeviriyoruz
     const data = await response.json();
 
-    // 🔹 Terminalde OpenRouter cevabını görebilmek için logluyoruz
     console.log("OpenRouter API Response:", JSON.stringify(data, null, 2));
 
-    // AI cevabını tekrar React frontend'e gönderiyoruz
-    // Frontend’in beklediği formatta dönüştürüp gönderiyoruz
+    // ✅ API hatası kontrolü
+    if (data.error) {
+      console.error("OpenRouter Error:", data.error);
+      return res.status(400).json({ error: data.error.message });
+    }
+
     const assistantMessage =
-      data.choices?.[0]?.message?.content ||
-      data.choices?.[0]?.text ||
-      "No response";
+      data.choices?.[0]?.message?.content || "No response";
 
     res.json({ choices: [{ message: { content: assistantMessage } }] });
 
   } catch (error) {
-    // Eğer hata olursa terminalde log göster
     console.error("Server error:", error);
-    // Frontend'e hata mesajı gönder
     res.status(500).json({ error: "Server error" });
   }
 });
 
-// Server'ı 3001 portunda çalıştırıyoruz
-// React genelde 3000 portunda çalışır, backend ayrı portta olur
 app.listen(3001, () => {
   console.log("AI proxy server running on port 3001");
 });
