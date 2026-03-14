@@ -22,7 +22,7 @@ export default function ChatBox({ messages, chatRef }) {
 
             <div className="messageBubble">
 
-              {/* 🤖 THINKING GÖSTERGES - Assistant için */}
+              {/* 🤖 THINKING  */}
               {role === "assistant" && (
                 <div className="assistant-header">
                   <BsRobot className="bot-icon" />
