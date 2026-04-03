@@ -1,6 +1,6 @@
 # 🚀 GoAI - ChatLab & Assistant
 
----
+
 
 ## 🇹🇷 TÜRKCE VERSION
 
@@ -112,6 +112,12 @@ Bu proje [MIT](LICENSE) lisansı altında korunmaktadır.
 
 ---
 
+
+
+
+# 🚀 GoAI - ChatLab & Assistant
+
+
 ## 🇩🇪 VERSION DEUTSCH
 
 Eine moderne, schnelle und multifunktionale KI-Erfahrung. **GoAI** integriert die leistungsstärksten KI-Modelle über die OpenRouter-API in einer einzigen professionellen Benutzeroberfläche und bietet fortschrittliche Dokumentenanalyse-Funktionen, mit denen Ihre Dokumente "gelesen" und Ihre Bilder interpretiert werden können.
@@ -221,6 +227,12 @@ Dieses Projekt ist unter der [MIT](LICENSE)-Lizenz geschützt.
 **Version:** 1.2.0 (Multimodal Document Update)
 
 ---
+
+
+
+
+# 🚀 GoAI - ChatLab & Assistant
+
 
 ## 🇺🇸 VERSION ENGLISH
 
