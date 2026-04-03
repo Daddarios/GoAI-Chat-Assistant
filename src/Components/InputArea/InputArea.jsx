@@ -130,7 +130,7 @@ export default function InputArea({
         ref={fileRef}
         type="file"
         multiple
-        accept=".pdf,.png,.jpg,.jpeg,.webp,.csv,.xlsx,.xls"
+        accept=".pdf,.png,.jpg,.jpeg,.webp,.csv,.xlsx,.xls,.docx"
         onChange={handleFileChange}
         hidden
       />

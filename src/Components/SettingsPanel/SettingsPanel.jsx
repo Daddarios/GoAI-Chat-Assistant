@@ -62,29 +62,46 @@ Alles für
 <label>Model Aussuchen</label>
 
 <select
-className="slct"
-value={model}
-onChange={(e)=>setModel(e.target.value)}
+  className="slct"
+  value={model}
+  onChange={(e) => setModel(e.target.value)}
 >
+ 
+ <option value="openai/gpt-oss-120b:free">
+    ChatGPT - FREE
+  </option>
 
+  {/* 2. En gelişmiş ücretsiz router (OpenRouter kendisi seçer) */}
+  <option value="openrouter/auto">
+    OpenRouter: Auto - Model
+  </option>
 
+  <option value="stepfun/step-3.5-flash:free">
+    Step-FUN Step 3.5
+  </option>
 
-{/* <option value="nvidia/nemotron-nano-9b-v2:free">
-NVIDIA Nemotron FREE
-</option>
+  <option value="nvidia/nemotron-3-super-120b-a12b:free">
+    NVIDIA Nemotron 3
+  </option>
+ {/*
+ ERSATZ-MODELLE
+   
+ stepfun/step-3.5-flash:free
 
- <option value="arcee-ai/trinity-large-preview:free">
-  Arcee- AI Trinity FREE
-</option> */}
+ qwen/qwen3.6-plus:free
 
-<option value="openai/gpt-oss-120b:free">
-  OpenAI GPT FREE
-</option>
-  {/* <option value="meta-llama/llama-3.3-70b-instruct:free">
-    Meta Llama 3.3 FREE
-  </option> */}
+ arcee-ai/trinity-large-preview:free
 
+ z-ai/glm-4.5-air:free
+
+ meta-llama/llama-3.3-70b-instruct:free
+
+ */}
+  
+  
 </select>
+
+
 </div>
 
 {/* SYSTEM PROMPT */}
