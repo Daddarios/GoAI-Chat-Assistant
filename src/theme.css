@@ -670,15 +670,6 @@ body.dark .slct option {
   gap: 8px;
 }
  
-/* .apky {
-filter: blur(3px);
-pointer-events: none;    
-user-select: none;       
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-} */
-
 /* Status / error text */
 .statusText {
   font-size: 12px;
