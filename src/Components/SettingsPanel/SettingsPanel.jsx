@@ -7,8 +7,6 @@ import { FiChevronDown } from "react-icons/fi";
 import { useState } from "react";
 
 export default function SettingsPanel({
-  apiKey,
- 
   model,
   setModel,
   systemPrompt,
@@ -16,10 +14,8 @@ export default function SettingsPanel({
   status,
   messages,
   clearChat,
-  
   toggleTheme,
   isSending,
-
   error,
   newChat,
   chats,
@@ -73,17 +69,20 @@ onChange={(e)=>setModel(e.target.value)}
 
 
 
-<option value="nvidia/nemotron-nano-9b-v2:free">
+{/* <option value="nvidia/nemotron-nano-9b-v2:free">
 NVIDIA Nemotron FREE
 </option>
 
- <option value="stepfun/step-3.5-flash:free">
-  Step 2.0 Flash FREE
-</option>
+ <option value="arcee-ai/trinity-large-preview:free">
+  Arcee- AI Trinity FREE
+</option> */}
 
-  <option value="google/gemma-3-12b-it:free">
-    Google Gemma 3 12B FREE
-  </option>
+<option value="openai/gpt-oss-120b:free">
+  OpenAI GPT FREE
+</option>
+  {/* <option value="meta-llama/llama-3.3-70b-instruct:free">
+    Meta Llama 3.3 FREE
+  </option> */}
 
 </select>
 </div>

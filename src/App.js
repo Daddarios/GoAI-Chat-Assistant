@@ -3,16 +3,14 @@ import Header from "./Components/Header/Header";
 import SettingsPanel from "./Components/SettingsPanel/SettingsPanel";
 import ChatBox from "./Components/ChatBox/ChatBox";
 import InputArea from "./Components/InputArea/InputArea";
-
+import{ sendenChatMessage} from "./aiService/aiService";
 import { GoSidebarExpand } from "react-icons/go";
-
 import "./theme.css";
 import { PiSidebarLight } from "react-icons/pi";
 
 export default function OpenRouterStreamingChat() {
  
   const [model, setModel] = useState("nvidia/nemotron-nano-9b-v2:free");
-  const [apiKey, setApiKey] = useState(""); // <-- ekle
   const [systemPrompt, setSystemPrompt] = useState("");
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -23,7 +21,7 @@ export default function OpenRouterStreamingChat() {
   const saved = localStorage.getItem("chat_history");
   return saved ? JSON.parse(saved) : [];
 });
-  //const [activeChatId,setActiveChatId] = useState(null);
+  const [activeChatId,setActiveChatId] = useState(null);
   
 
   // ✅ Sidebar state (ChatGPT-like)
@@ -44,6 +42,7 @@ export default function OpenRouterStreamingChat() {
   const chatRef = useRef(null);
   const abortRef = useRef(null);
 
+ // 1. Uygulama ilk açıldığında hiç chat yoksa bir tane "New Chat" oluşturur
 useEffect(() => {
   if (chats.length === 0) {
     const firstChat = {
@@ -53,17 +52,21 @@ useEffect(() => {
     };
 
     setChats([firstChat]);
-    //setActiveChatId(firstChat.id);
+   
   }
 }, [chats.length]);
 
-
+// 2. Mesajlar her değiştiğinde local tarayıcı hafızasına (localStorage) kaydeder
   useEffect(() => {
     try {
       localStorage.setItem("or_react_chat_v1", JSON.stringify(messages));
-    } catch {}
+    }catch (err) {
+    console.error("Local storage fehler:", err);
+  } 
+
   }, [messages]);
 
+// 3. Mesajlar değiştikçe sayfayı otomatik olarak en aşağı kaydırır (Smooth scroll)
 useEffect(() => {
   const el = chatRef.current;
   if (!el) return;
@@ -76,14 +79,26 @@ useEffect(() => {
   
 }, [messages]);
 
-  // Ensure body class is in sync with state (important for theme.css)
+// 4. AKTİF CHAT GÜNCELLEME: Mesaj yazıldıkça soldaki chat listesindeki içeriği günceller
+useEffect(() => {
+  if (!activeChatId) return; // Eğer aktif bir chat seçili değilse işlem yapma
+  setChats(prev =>
+    prev.map(chat =>
+      chat.id === activeChatId
+        ? { ...chat, messages } // Aktif chat'in mesajlarını güncelle
+        : chat
+    )
+  );
+}, [messages, activeChatId]);
+
+  // 5. Ensure body class is in sync with state (important for theme.css)
   useEffect(() => {
     const body = document.body;
     if (dark) body.classList.add("dark");
     else body.classList.remove("dark");
   }, [dark]);
 
-  // Close sidebar on ESC (nice UX)
+  //6. Close Sidebar on ESC (nice UX)
   useEffect(() => {
     const onEsc = (e) => {
       if (e.key === "Escape") setSidebarOpen(false);
@@ -92,7 +107,7 @@ useEffect(() => {
     return () => window.removeEventListener("keydown", onEsc);
   }, []);
  
-
+// 7. Chat listesi (chats) her değiştiğinde tarayıcı hafızasına kaydeder
   useEffect(() => {
   localStorage.setItem("chat_history", JSON.stringify(chats));
 }, [chats]);
@@ -128,6 +143,7 @@ function deleteChat(id) {
   }
 
   setMessages([]);
+  setActiveChatId(null);
 
 }
 
@@ -209,33 +225,23 @@ function deleteChat(id) {
     
 
     try {
-    const response = await fetch("http://localhost:3001/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            model,
-            systemPrompt,
-            messages,
-            userText: fileBlocks.length
-                ? [
-                    { type: "text", text: text?.length ? text : "Bu dosyayı analiz et ve hafızanda tut." },
-                    ...fileBlocks
-                  ]
-                : text,
-        }),
-        signal: controller.signal,
+    const assistantMessage = await sendenChatMessage({
+        model,
+        systemPrompt,
+        messages,
+        userText: fileBlocks.length
+        ?[
+          {type: "text", text: text?.length ? text :"Bu dosyayi analiz et ve hafizanda tut."},
+          ...fileBlocks
+        ]
+        :text,
+        signal : controller.signal,
     });
-
-    const data = await response.json();
-
-    console.log("Backend response:", data); // ← Bunu ekle, terminalde cevabı gör
-
-    const assistantMessage = data.choices?.[0]?.message?.content || "No responses";
-
-    setMessages((prev) => {
+     setMessages((prev) => {
         const next = [...prev];
-        next[assistantIndex] = { ...next[assistantIndex], content: assistantMessage };
+        next[assistantIndex] = {...next[assistantIndex], content: assistantMessage};
         return next;
+  
     });
 } catch (e) {
     const msg = e?.message || "Fehler";
@@ -263,6 +269,7 @@ function deleteChat(id) {
 
   function loadChat(chat) {
   setMessages(chat.messages);
+  setActiveChatId(chat.id);
 }
 
 function renameChat(id) {
@@ -336,8 +343,6 @@ function renameChat(id) {
   </div>
         <div style={{ padding: 16 }}>
           <SettingsPanel
-            apiKey={apiKey}
-            setApiKey={setApiKey}
             model={model}
             setModel={setModel}
             toggleTheme={toggleTheme}
