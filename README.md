@@ -9,6 +9,9 @@ Modern, hızlı ve çok fonksiyonlu bir yapay zeka deneyimi. **GoAI**, OpenRoute
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)
 ![OpenRouter](https://img.shields.io/badge/API-OpenRouter-7E33E1?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ---
 
@@ -26,10 +29,11 @@ Modern, hızlı ve çok fonksiyonlu bir yapay zeka deneyimi. **GoAI**, OpenRoute
 
 ### 🛠️ Teknoloji Yığını
 
-- **Frontend:** React 19, Hooks, React Icons, React Markdown.
-- **Backend:** Node.js, Express, Axios, CORS.
-- **Dosya İşleme:** `pdfjs-dist` (PDF), `xlsx` (Excel), `mammoth` (Word).
-- **API Entegrasyonu:** OpenRouter AI API.
+- **Frontend:** [React 19](https://react.dev), JavaScript (ES6+), HTML5, Vanilla CSS3.
+- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
+- **Dosya İşleme:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
+- **AI Entegrasyonu:** [OpenRouter AI API](https://openrouter.ai).
+- **UI & Markdown:** [React Markdown](https://github.com/remarkjs/react-markdown), [Highlight.js](https://highlightjs.org).
 
 ---
 
@@ -106,6 +110,9 @@ Eine moderne, schnelle und multifunktionale KI-Erfahrung. **GoAI** integriert di
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)
 ![OpenRouter](https://img.shields.io/badge/API-OpenRouter-7E33E1?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ---
 
@@ -123,10 +130,11 @@ Eine moderne, schnelle und multifunktionale KI-Erfahrung. **GoAI** integriert di
 
 ### 🛠️ Technologie-Stack
 
-- **Frontend:** React 19, Hooks, React Icons, React Markdown.
-- **Backend:** Node.js, Express, Axios, CORS.
-- **Dateiverarbeitung:** `pdfjs-dist` (PDF), `xlsx` (Excel), `mammoth` (Word).
-- **API-Integration:** OpenRouter AI API.
+- **Frontend:** [React 19](https://react.dev), JavaScript (ES6+), HTML5, Vanilla CSS3.
+- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
+- **Dateiverarbeitung:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
+- **API-Integration:** [OpenRouter AI API](https://openrouter.ai).
+- **UI & Markdown:** [React Markdown](https://github.com/remarkjs/react-markdown), [Highlight.js](https://highlightjs.org).
 
 ---
 
@@ -203,6 +211,9 @@ A modern, fast, and multifunctional AI experience. **GoAI** integrates the most 
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)
 ![OpenRouter](https://img.shields.io/badge/API-OpenRouter-7E33E1?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ---
 
@@ -220,10 +231,11 @@ A modern, fast, and multifunctional AI experience. **GoAI** integrates the most 
 
 ### 🛠️ Tech Stack
 
-- **Frontend:** React 19, Hooks, React Icons, React Markdown.
-- **Backend:** Node.js, Express, Axios, CORS.
-- **File Processing:** `pdfjs-dist` (PDF), `xlsx` (Excel), `mammoth` (Word).
-- **API Integration:** OpenRouter AI API.
+- **Frontend:** [React 19](https://react.dev), JavaScript (ES6+), HTML5, Vanilla CSS3.
+- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
+- **File Processing:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
+- **API Integration:** [OpenRouter AI API](https://openrouter.ai).
+- **UI & Markdown:** [React Markdown](https://github.com/remarkjs/react-markdown), [Highlight.js](https://highlightjs.org).
 
 ---
 
