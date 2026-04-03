@@ -164,3 +164,44 @@ export async function sendStreamingRequest({
   throw new Error("Fehler !");
 }
 
+/**
+ * Backend proxy (localhost:3001/chat) üzerinden 
+ * OpenRouter API'sine istek gönderen fonksiyon.
+ */
+export async function sendenChatMessage({
+  model,
+  systemPrompt,
+  messages,
+  userText,
+  signal
+}) {
+  try {
+    const response = await fetch("http://localhost:3001/chat", {
+      method: "POST",
+      signal, // İstek durdurma (AbortSignal) desteği
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model,
+        systemPrompt,
+        messages,
+        userText,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `Sunucu hatası: ${response.status}`);
+    }
+
+    const data = await response.json();
+    // server/server.js'den dönen formata göre asistanın mesajını döndür
+    return data.choices?.[0]?.message?.content || "Yanıt alınamadı.";
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw new Error("İşlem kullanıcı tarafından durduruldu.");
+    }
+    throw err;
+  }
+}

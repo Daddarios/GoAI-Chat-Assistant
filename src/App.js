@@ -7,6 +7,8 @@ import{ sendenChatMessage} from "./aiService/aiService";
 import { GoSidebarExpand } from "react-icons/go";
 import "./theme.css";
 import { PiSidebarLight } from "react-icons/pi";
+import { parseFile } from "./aiService/fileParser";
+
 
 export default function OpenRouterStreamingChat() {
  
@@ -161,7 +163,7 @@ function deleteChat(id) {
     });
   }
 
-  async function onSend() {
+    async function onSend() {
     const text = input.trim();
     const hasFiles = pendingFiles.length > 0;
 
@@ -181,39 +183,40 @@ function deleteChat(id) {
       })),
     };
 
-      const assistantIndex = messages.length + 1;
+    const assistantIndex = messages.length + 1;
 
-      setMessages((prev) => {
-        return [...prev, userMsg, { role: "assistant", content: "" }];
-      });
+    setMessages((prev) => {
+      return [...prev, userMsg, { role: "assistant", content: "" }];
+    });
 
     let fileBlocks = [];
+    let extractedTexts = "";
 
-    for (const f of memoryFiles) {
-      const base64 = await fileToBase64(f);
-
+    // 🚀 YENİ: Gönderilen dosyaları ayırt ederek işle
+    for (const f of pendingFiles) {
       if (f.type.startsWith("image/")) {
+        // Resimleri görsel formatta (base64) hazırla
+        const base64 = await fileToBase64(f);
         fileBlocks.push({
           type: "image_url",
           image_url: { url: base64 },
         });
-      } else if (f.type === "application/pdf") {
-        fileBlocks.push({
-          type: "file",
-          file: { url: base64 },
-        });
-      } else if (f.name.endsWith(".csv")) {
-        const txt = await f.text();
-        fileBlocks.push({
-          type: "text",
-          text: `CSV DATA:\n${txt}`,
-        });
+      } else {
+        // Dökümanları (PDF, Excel, Word) metne çevir
+        setStatus(`${f.name} okunuyor...`);
+        const textContent = await parseFile(f);
+        if (textContent) {
+          extractedTexts += `\n[BELGE: ${f.name}]:\n${textContent}\n`;
+        }
       }
     }
 
     if (pendingFiles.length > 0) {
       setMemoryFiles((prev) => [...prev, ...pendingFiles]);
     }
+
+    // 🚀 YENİ: Kullanıcı metni ile dosyadan çıkan metni birleştir
+    const promptWithDocuments = text + (extractedTexts ? `\n\nEk döküman içerikleri:\n${extractedTexts}` : "");
 
     setInput("");
     setPendingFiles([]);
@@ -222,46 +225,47 @@ function deleteChat(id) {
     const controller = new AbortController();
     abortRef.current = controller;
 
-    
-
     try {
-    const assistantMessage = await sendenChatMessage({
+      const assistantMessage = await sendenChatMessage({
         model,
         systemPrompt,
         messages,
+        // Eğer resim varsa bloklar halinde, yoksa sadece birleştirilmiş metin olarak gönder
         userText: fileBlocks.length
-        ?[
-          {type: "text", text: text?.length ? text :"Bu dosyayi analiz et ve hafizanda tut."},
-          ...fileBlocks
-        ]
-        :text,
-        signal : controller.signal,
-    });
-     setMessages((prev) => {
+          ? [
+              { type: "text", text: promptWithDocuments || "Bu dosyayı analiz et." },
+              ...fileBlocks
+            ]
+          : promptWithDocuments,
+        signal: controller.signal,
+      });
+
+      setMessages((prev) => {
         const next = [...prev];
-        next[assistantIndex] = {...next[assistantIndex], content: assistantMessage};
+        next[assistantIndex] = { ...next[assistantIndex], content: assistantMessage };
         return next;
-  
-    });
-} catch (e) {
-    const msg = e?.message || "Fehler";
-    setMessages((prev) => {
+      });
+    } catch (e) {
+      const msg = e?.message || "Hata oluştu";
+      setMessages((prev) => {
         const next = [...prev];
         for (let i = next.length - 1; i >= 0; i--) {
-            if (next[i].role === "assistant") {
-                next[i] = { role: "assistant", content: "Fehler: " + msg };
-                break;
-            }
+          if (next[i].role === "assistant") {
+            next[i] = { role: "assistant", content: "Hata: " + msg };
+            break;
+          }
         }
         return next;
-    });
-    setError(msg);
-    setStatus("Fehler");
-} finally {
-    setIsSending(false);
-    abortRef.current = null;
-}
+      });
+      setError(msg);
+      setStatus("Hata");
+    } finally {
+      setIsSending(false);
+      setStatus("Hazır.");
+      abortRef.current = null;
+    }
   }
+
 
   function addFiles(files) {
     setPendingFiles((prev) => [...prev, ...files]);
@@ -302,91 +306,80 @@ function renameChat(id) {
   }
 
   return (
-    <div className="app appShell">
-      {/* Topbar (menu button + theme toggle) */}
-      <div className="topbar">
-        <button
-          type="button"
-          className="menuBtn"
-          aria-label="Ayarlar menüsünü aç/kapat"
-          onClick={() => setSidebarOpen((v) => !v)}
-        >
-          <PiSidebarLight />
-        </button>
-          <Header 
-          
-          
-           dark={dark} toggleTheme={toggleTheme}/>
-        
-      </div>
-
-      {/* Scrim */}
-      <div
-        className={`scrim ${sidebarOpen ? "open" : ""}`}
-        onClick={() => setSidebarOpen(false)}
-        aria-hidden={!sidebarOpen}
-      />
-
-      {/* Sidebar (ONLY SettingsPanel) */}
-      <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-          <div className="sidebarHeader">
-
-
+    <div className={`app appShell ${sidebarOpen ? "sidebar-is-open" : ""}`}>
+  {/* Topbar (menu button + theme toggle) */}
+  <div className="topbar">
     <button
-      className="closeSidebarBtn"
-      onClick={() => setSidebarOpen(false)}
-      aria-label="Sidebar kapat"
+      type="button"
+      className="menuBtn"
+      aria-label="Ayarlar menüsünü aç/kapat"
+      onClick={() => setSidebarOpen((v) => !v)}
     >
-     <GoSidebarExpand />
-
+      <PiSidebarLight />
     </button>
+    <Header dark={dark} toggleTheme={toggleTheme} />
   </div>
-        <div style={{ padding: 16 }}>
-          <SettingsPanel
-            model={model}
-            setModel={setModel}
-            toggleTheme={toggleTheme}
-            systemPrompt={systemPrompt}
-            setSystemPrompt={setSystemPrompt}
-            status={status}
-            messages={messages}
-            clearChat={clearChat}
-            stop={stop}
-            isSending={isSending}
-            error={error}
-            newChat={newChat}
-            chats={chats}
-             
-            loadChat={loadChat}
-            deleteChat={deleteChat}
-            renameChat={renameChat}
 
+  {/* Scrim */}
+  <div
+    className={`scrim ${sidebarOpen ? "open" : ""}`}
+    onClick={() => setSidebarOpen(false)}
+    aria-hidden={!sidebarOpen}
+  />
 
-          />
-        </div>
-      </aside>
-
-      {/* Center column */}
-      <div className="centerWrap">
-        
-
-        <div className="chat-container">
-          <ChatBox messages={messages} chatRef={chatRef} />
-        </div>
-
-        <InputArea
-          input={input}
-          setInput={setInput}
-          onSend={onSend}
-          onKeyDown={onKeyDown}
-          canSend={canSend}
-          isSending={isSending}
-          onFilesSelected={addFiles}
-          selectedFiles={pendingFiles}
-          onRemoveFile={removeFile}
-          stop={stop}
-        />
-      </div>
+  {/* Sidebar (ONLY SettingsPanel) */}
+  <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+    <div className="sidebarHeader">
+      <button
+        className="closeSidebarBtn"
+        onClick={() => setSidebarOpen(false)}
+        aria-label="Sidebar kapat"
+      >
+        <GoSidebarExpand />
+      </button>
     </div>
+    <div style={{ padding: 16 }}>
+      <SettingsPanel
+        model={model}
+        setModel={setModel}
+        toggleTheme={toggleTheme}
+        systemPrompt={systemPrompt}
+        setSystemPrompt={setSystemPrompt}
+        status={status}
+        messages={messages}
+        clearChat={clearChat}
+        stop={stop}
+        isSending={isSending}
+        error={error}
+        newChat={newChat}
+        chats={chats}
+        loadChat={loadChat}
+        deleteChat={deleteChat}
+        renameChat={renameChat}
+      />
+    </div>
+  </aside>
+
+  {/* Center column */}
+  <div className="centerWrap">
+    <div className="chat-container">
+      <ChatBox messages={messages} chatRef={chatRef} />
+    </div>
+
+    <InputArea
+      input={input}
+      setInput={setInput}
+      onSend={onSend}
+      onKeyDown={onKeyDown}
+      canSend={canSend}
+      isSending={isSending}
+      onFilesSelected={addFiles}
+      selectedFiles={pendingFiles}
+      onRemoveFile={removeFile}
+      stop={stop}
+    />
+  </div>
+</div>
+
   );
 }

@@ -241,7 +241,7 @@ body {
   width: var(--sidebar-w);
   height: 100vh;
   transform: translateX(-102%);
-  transition: transform 0.22s ease;
+  transition: transform 0.9s ease;
   background: color-mix(in srgb, var(--surface) 92%, transparent);
   backdrop-filter: blur(12px);
   border-right: 1px solid var(--border);
@@ -377,8 +377,11 @@ body.dark .slct option {
 
 /* --------- Chat UI: Messages --------- */
 .messages {
+   width: 100%;             /* Bunu ekleyin: Tüm genişliği kaplamasını sağlar */
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
+  display: flex;           /* Bunu ekleyin: Konumlandırma kurallarını etkinleştirir */
+  flex-direction: column;  /* Bunu ekleyin: Mesajların alt alta dizilmesini sağlar */
   padding: 12px 6px 18px;
 }
 
@@ -1158,4 +1161,27 @@ color:white;
     background: var(--accent);
     transform: translateY(6px);
   }
+}
+
+
+
+
+
+/* Sidebar açıkken chat alanının kaymasını engelleyen ve ortalı tutan çözüm */
+
+@media (min-width: 1024px) {
+  /* Masaüstünde tıklamaları engelleyen gölge katmanını pasif yapıyoruz */
+  .app.appShell.sidebar-is-open .scrim {
+    background: rgba(0, 0, 0, 0); /* Görünmez yap */
+    pointer-events: none; /* Tıklamaları alta (chat alanına) geçir */
+  }
+
+  /* Sidebar'ı olduğu gibi (fixed) bırakıyoruz, sadece gölgesini biraz yumuşatabiliriz */
+  .app.appShell.sidebar-is-open .sidebar {
+    box-shadow: 10px 0 30px rgba(0,0,0,0.1); 
+    z-index: 50;
+  }
+
+  /* Chat alanı (centerWrap) mevcut halini korur: Herzaman ortada kalır */
+  /* Hiçbir ekstra CSS eklemeye gerek yok, varsayılan 'margin: 0 auto' zaten ortalar. */
 }
