@@ -1,10 +1,6 @@
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const FREE_MODELS = [
-  // "nvidia/nemotron-nano-9b-v2:free",
-  // "arcee-ai/trinity-large-preview:free",
   "openai/gpt-oss-120b:free",
-  // "meta-llama/llama-3.3-70b-instruct:free"
-
 ];
 
 function sleep(ms) {
@@ -72,9 +68,6 @@ export async function sendStreamingRequest({
 
 
       if (!res.ok) {
-
-
-
         let data = {};
         try { data = await res.json(); } catch { }
 
@@ -92,7 +85,6 @@ export async function sendStreamingRequest({
         }
 
         throw new Error(msg);
-
       }
 
       if (!res.body) {
@@ -134,7 +126,7 @@ export async function sendStreamingRequest({
             const token = json?.choices?.[0]?.delta?.content;
 
             if (typeof token === "string" && token.length) {
-              onToken(token); // 🔥 sadece token gönderir
+              onToken(token); 
             }
 
             const streamErr = json?.error?.message;
@@ -165,7 +157,7 @@ export async function sendStreamingRequest({
 }
 
 /**
- * Backend proxy (localhost:3001/chat) üzerinden 
+ * Backend proxy (/chat) üzerinden 
  * OpenRouter API'sine istek gönderen fonksiyon.
  */
 export async function sendenChatMessage({
@@ -176,7 +168,8 @@ export async function sendenChatMessage({
   signal
 }) {
   try {
-    const response = await fetch("http://localhost:3001/chat", {
+    // ✅ YENİ: Docker uyumluluğu için localhost:3001 yerine relative path (/chat) kullanıldı
+    const response = await fetch("/chat", {
       method: "POST",
       signal, // İstek durdurma (AbortSignal) desteği
       headers: {
@@ -196,7 +189,6 @@ export async function sendenChatMessage({
     }
 
     const data = await response.json();
-    // server/server.js'den dönen formata göre asistanın mesajını döndür
     return data.choices?.[0]?.message?.content || "Yanıt alınamadı.";
   } catch (err) {
     if (err.name === 'AbortError') {
@@ -205,3 +197,4 @@ export async function sendenChatMessage({
     throw err;
   }
 }
+

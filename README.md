@@ -16,9 +16,13 @@ Modern, hızlı ve çok fonksiyonlu bir yapay zeka deneyimi. **GoAI**, OpenRoute
 ![CSS](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![npm](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFD21E?logo=huggingface&logoColor=black)
 ![OpenRouter](https://img.shields.io/badge/OpenRouter-94A3B8?logo=openrouter&logoColor=fff)
 ![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=visualstudiocode&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-121013?logo=github&logoColor=white)
 ![ReadMe](https://img.shields.io/badge/ReadMe-018EF5?logo=readme&logoColor=fff)
 
 
@@ -33,6 +37,7 @@ Modern, hızlı ve çok fonksiyonlu bir yapay zeka deneyimi. **GoAI**, OpenRoute
 - **📜 Yerel Hafıza (History):** Tüm sohbet geçmişi tarayıcı hafızasında saklanır; oturumları isimlendirebilir veya yönetebilirsiniz.
 - **🎨 Glassmorphism Tasarım:** Vanilla CSS ile tasarlanmış, modern, şeffaf ve premium bir kullanıcı arayüzü.
 - **🔒 Güvenli Veri Akışı:** API anahtarlarınızı korumak için tasarlanmış bağımsız Node.js Proxy sunucusu.
+- **🐳 Bulut Hazır:** Docker desteği sayesinde Hugging Face Spaces üzerinden 7/24 erişilebilir.
 
 ---
 
@@ -42,6 +47,7 @@ Modern, hızlı ve çok fonksiyonlu bir yapay zeka deneyimi. **GoAI**, OpenRoute
 - **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
 - **Dosya İşleme:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
 - **AI Entegrasyonu:** [OpenRouter AI API](https://openrouter.ai).
+- **DevOps & Dağıtım:** Docker, GitHub Actions (CI/CD Pipeline), Hugging Face Spaces.
 - **UI & Markdown:** [React Markdown](https://github.com/remarkjs/react-markdown), [Highlight.js](https://highlightjs.org).
 
 ---
@@ -132,8 +138,12 @@ Eine moderne, schnelle und multifunktionale KI-Erfahrung. **GoAI** integriert di
 ![CSS](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![npm](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFD21E?logo=huggingface&logoColor=black)
 ![OpenRouter](https://img.shields.io/badge/OpenRouter-94A3B8?logo=openrouter&logoColor=fff)
 ![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=visualstudiocode&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-121013?logo=github&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)
 ![ReadMe](https://img.shields.io/badge/ReadMe-018EF5?logo=readme&logoColor=fff)
 
@@ -149,6 +159,7 @@ Eine moderne, schnelle und multifunktionale KI-Erfahrung. **GoAI** integriert di
 - **📜 Lokaler Verlauf (History):** Der gesamte Chat-Verlauf wird im Browser-Speicher gesichert; Sitzungen können umbenannt oder verwaltet werden.
 - **🎨 Glassmorphism Design:** Ein modernes, transparentes Premium-UI, das vollständig mit Vanilla CSS entworfen wurde.
 - **🔒 Sicherer Datenfluss:** Unabhängiger Node.js-Proxy-Server zum Schutz Ihrer API-Schlüssel.
+- **🐳 Cloud Ready:** Rund um die Uhr über Hugging Face Spaces dank Docker-Unterstützung erreichbar.
 
 ---
 
@@ -158,6 +169,7 @@ Eine moderne, schnelle und multifunktionale KI-Erfahrung. **GoAI** integriert di
 - **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
 - **Dateiverarbeitung:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
 - **API-Integration:** [OpenRouter AI API](https://openrouter.ai).
+- **DevOps & Deployment:** Docker, GitHub Actions (CI/CD Pipeline), Hugging Face Spaces.
 - **UI & Markdown:** [React Markdown](https://github.com/remarkjs/react-markdown), [Highlight.js](https://highlightjs.org).
 
 ---
@@ -248,9 +260,13 @@ A modern, fast, and multifunctional AI experience. **GoAI** integrates the most 
 ![CSS](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![npm](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFD21E?logo=huggingface&logoColor=black)
 ![OpenRouter](https://img.shields.io/badge/OpenRouter-94A3B8?logo=openrouter&logoColor=fff)
 ![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=visualstudiocode&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-121013?logo=github&logoColor=white)
 ![ReadMe](https://img.shields.io/badge/ReadMe-018EF5?logo=readme&logoColor=fff)
 
 
@@ -265,6 +281,7 @@ A modern, fast, and multifunctional AI experience. **GoAI** integrates the most 
 - **📜 Local History:** All chat history is saved in the browser's storage; sessions can be renamed or managed.
 - **🎨 Glassmorphism Design:** A modern, transparent premium UI designed entirely with Vanilla CSS.
 - **🔒 Secure Data Workflow:** Independent Node.js Proxy server designed to protect your API keys.
+- **🐳 Cloud Ready:** Accessible 24/7 via Hugging Face Spaces thanks to Docker support.
 
 ---
 
@@ -274,6 +291,7 @@ A modern, fast, and multifunctional AI experience. **GoAI** integrates the most 
 - **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
 - **File Processing:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
 - **API Integration:** [OpenRouter AI API](https://openrouter.ai).
+- **DevOps & Deployment:** Docker, GitHub Actions (CI/CD Pipeline), Hugging Face Spaces.
 - **UI & Markdown:** [React Markdown](https://github.com/remarkjs/react-markdown), [Highlight.js](https://highlightjs.org).
 
 ---
@@ -341,3 +359,9 @@ This project is protected under the [MIT](LICENSE) license.
 
 **Developed by:** [Onur Gökhan Bicer]
 **Version:** 1.2.0 (Multimodal Document Update)
+
+
+
+
+
+
