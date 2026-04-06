@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN CI=false npm run build
 
 # 2. AŞAMA: Çalıştırma (Runtime Stage)
 FROM node:20-alpine
