@@ -2,15 +2,15 @@
   "name": "server",
   "version": "1.0.0",
   
-  "description": "",
+  "description": "GoAI ChatLab - Node.js Proxy Server for OpenRouter API",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["openrouter", "ai", "proxy", "express"],
+  "author": "Onur Gökhan Bicer",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "cors": "^2.8.6",

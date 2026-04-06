@@ -24,4 +24,9 @@ yarn-error.log*
 
 # local env files
 server/.env
+
+# accidental terminal artifacts
+cls
+gh
+master
   
