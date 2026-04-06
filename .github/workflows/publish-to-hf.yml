@@ -2,20 +2,31 @@ name: Publish to Hugging Face Spaces
 
 on:
   push:
-    branches: [master] # Eğer ana dalınız 'main' ise 'master' yerine 'main' yazın
+    branches: [master]
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-        lfs: true
 
-    - name: Push to HF
-      env:
-        HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      run: |
-        git push --force https://Daddarios:$HF_TOKEN@huggingface.co/spaces/Daddarios/GoAI-Lab master
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v4
+
+      - name: Push all files to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "github-actions"
+
+          git clone https://Daddarios:$HF_TOKEN@huggingface.co/spaces/Daddarios/GoAI-Lab hf-space
+
+          rsync -av --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            ./ hf-space/
+
+          cd hf-space
+          git add .
+          git commit -m "Sync from GitHub" || echo "No changes to commit"
+          git push
