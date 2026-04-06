@@ -12,7 +12,7 @@ jobs:
       - name: Checkout GitHub repo
         uses: actions/checkout@v4
 
-      - name: Push all files to Hugging Face Space
+      - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
@@ -21,12 +21,13 @@ jobs:
 
           git clone https://Daddarios:$HF_TOKEN@huggingface.co/spaces/Daddarios/GoAI-Lab hf-space
 
-          rsync -av --delete \
-            --exclude '.git' \
-            --exclude '.github' \
-            ./ hf-space/
+          cp -r . hf-space/
+          rm -rf hf-space/.git
 
           cd hf-space
+          git init
+          git remote add origin https://Daddarios:$HF_TOKEN@huggingface.co/spaces/Daddarios/GoAI-Lab
+
           git add .
-          git commit -m "Sync from GitHub" || echo "No changes to commit"
-          git push
+          git commit -m "Sync from GitHub" || echo "No changes"
+          git push -f origin main
