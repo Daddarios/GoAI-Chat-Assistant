@@ -10,18 +10,17 @@ RUN CI=false npm run build
 FROM node:20-alpine
 WORKDIR /app
 
-# Hugging Face için kullanıcı (UID 1000) yapılandırması
-RUN adduser -D -u 1000 user
-USER user
-ENV PATH="/home/user/.local/bin:$PATH"
+# Hugging Face için varsayılan 'node' kullanıcısını (UID 1000) kullanıyoruz
+USER node
+ENV PATH="/home/node/.local/bin:$PATH"
 
 # Arka yüz bağımlılıklarını kur
-COPY --chown=user:user server/package*.json ./server/
+COPY --chown=node:node server/package*.json ./server/
 RUN cd server && npm install --omit=dev
 
 # Önyüz build dosyalarını ve arka yüz kodunu kopyala
-COPY --chown=user:user --from=build-stage /app/build ./build
-COPY --chown=user:user server/ ./server/
+COPY --chown=node:node --from=build-stage /app/build ./build
+COPY --chown=node:node server/ ./server/
 
 # Portu ayarla (Hugging Face gereksinimi: 7860)
 EXPOSE 7860
