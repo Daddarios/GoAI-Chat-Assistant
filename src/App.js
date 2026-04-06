@@ -30,7 +30,6 @@ export default function OpenRouterStreamingChat() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [pendingFiles, setPendingFiles] = useState([]);
-  const [memoryFiles, setMemoryFiles] = useState([]);
 
   const [messages, setMessages] = useState(() => {
     try {
@@ -122,7 +121,6 @@ useEffect(() => {
 
   function clearChat() {
     setMessages([]);
-    setMemoryFiles([]);
     setError("");
     setStatus("Temizlendi.");
   }
@@ -209,10 +207,6 @@ function deleteChat(id) {
           extractedTexts += `\n[BELGE: ${f.name}]:\n${textContent}\n`;
         }
       }
-    }
-
-    if (pendingFiles.length > 0) {
-      setMemoryFiles((prev) => [...prev, ...pendingFiles]);
     }
 
     // 🚀 YENİ: Kullanıcı metni ile dosyadan çıkan metni birleştir
