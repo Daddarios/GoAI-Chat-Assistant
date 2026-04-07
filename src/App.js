@@ -332,7 +332,7 @@ function renameChat(id) {
         <GoSidebarExpand />
       </button>
     </div>
-    <div style={{ padding: 16 }}>
+    <div style={{ padding: 16, flex: 1, overflowY: "auto" }}>
       <SettingsPanel
         model={model}
         setModel={setModel}

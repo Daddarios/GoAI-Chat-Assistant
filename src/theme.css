@@ -12,10 +12,12 @@
 *::after {
   box-sizing: border-box;
 }
+
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
@@ -24,6 +26,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
 img,
 svg,
 video,
@@ -31,12 +34,14 @@ canvas {
   display: block;
   max-width: 100%;
 }
+
 button,
 input,
 textarea,
 select {
   font: inherit;
 }
+
 a {
   color: inherit;
 }
@@ -77,11 +82,15 @@ a {
   --muted-2: #6b7280;
 
   /* Chat surfaces */
-  --bubble-user: #e5e7eb;          /* user bubble bg (light) */
-  --bubble-user-text: #111827;     /* user bubble text (light) */
+  --bubble-user: #e5e7eb;
+  /* user bubble bg (light) */
+  --bubble-user-text: #111827;
+  /* user bubble text (light) */
 
-  --bubble-ai: transparent;        /* assistant bubble bg (light) */
-  --bubble-ai-text: #1f2937;       /* assistant bubble text (light) */
+  --bubble-ai: transparent;
+  /* assistant bubble bg (light) */
+  --bubble-ai-text: #1f2937;
+  /* assistant bubble text (light) */
 
   /* Code */
   --code-bg: #f1f5f9;
@@ -130,13 +139,16 @@ body {
   scrollbar-width: thin;
   scrollbar-color: var(--scroll-thumb) var(--scroll-track);
 }
+
 *::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
+
 *::-webkit-scrollbar-track {
   background: var(--scroll-track);
 }
+
 *::-webkit-scrollbar-thumb {
   background: var(--scroll-thumb);
   border-radius: 999px;
@@ -181,13 +193,16 @@ body {
   box-shadow: var(--shadow-sm);
   transition: transform 0.08s ease, background 0.2s ease, border-color 0.2s ease;
 }
+
 .menuBtn:hover {
   background: color-mix(in srgb, var(--surface) 88%, var(--accent) 12%);
   border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 28%);
 }
+
 .menuBtn:active {
   transform: translateY(1px);
 }
+
 .menuBtn svg {
   width: 20px;
   height: 20px;
@@ -214,7 +229,7 @@ body {
 }
 
 /* A nice inner panel feel */
-.chat-container > * {
+.chat-container>* {
   height: 100%;
 }
 
@@ -227,6 +242,7 @@ body {
   pointer-events: none;
   transition: background 0.18s ease;
 }
+
 .scrim.open {
   background: rgba(0, 0, 0, 0.38);
   pointer-events: auto;
@@ -249,6 +265,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .sidebar.open {
   transform: translateX(0);
 }
@@ -277,13 +294,16 @@ body {
   cursor: pointer;
   transition: transform 0.08s ease, background 0.2s ease, border-color 0.2s ease;
 }
+
 .closeSidebarBtn:hover {
   background: color-mix(in srgb, var(--surface) 88%, var(--accent) 12%);
   border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 28%);
 }
+
 .closeSidebarBtn:active {
   transform: translateY(1px);
 }
+
 .closeSidebarBtn svg {
   width: 20px;
   height: 20px;
@@ -302,12 +322,15 @@ button.btn {
   box-shadow: var(--shadow-sm);
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.08s ease;
 }
+
 .btn:hover {
   border-color: var(--border-2);
 }
+
 .btn:active {
   transform: translateY(1px);
 }
+
 .btn:focus-visible {
   outline: none;
   box-shadow: var(--ring);
@@ -318,9 +341,11 @@ button.btn {
   border-color: color-mix(in srgb, var(--accent) 70%, black 30%);
   color: #fff;
 }
+
 .btnPrimary:hover {
   background: var(--accent-2);
 }
+
 .btnDanger {
   background: color-mix(in srgb, var(--danger) 92%, transparent);
   border-color: color-mix(in srgb, var(--danger) 55%, var(--border) 45%);
@@ -359,17 +384,19 @@ body.dark .slct {
   background: var(--surface);
   color: var(--text);
   border-color: var(--border);
-  
+
 }
+
 body.dark .slct option {
   background: var(--surface-1);
   color: var(--text);
-  
+
 }
 
 .input::placeholder {
   color: var(--muted-2);
 }
+
 .input:focus {
   border-color: color-mix(in srgb, var(--accent) 55%, var(--border) 45%);
   box-shadow: var(--ring);
@@ -377,11 +404,14 @@ body.dark .slct option {
 
 /* --------- Chat UI: Messages --------- */
 .messages {
-   width: 100%;             /* Bunu ekleyin: Tüm genişliği kaplamasını sağlar */
+  width: 100%;
+  /* Bunu ekleyin: Tüm genişliği kaplamasını sağlar */
   height: 100%;
   overflow-y: auto;
-  display: flex;           /* Bunu ekleyin: Konumlandırma kurallarını etkinleştirir */
-  flex-direction: column;  /* Bunu ekleyin: Mesajların alt alta dizilmesini sağlar */
+  display: flex;
+  /* Bunu ekleyin: Konumlandırma kurallarını etkinleştirir */
+  flex-direction: column;
+  /* Bunu ekleyin: Mesajların alt alta dizilmesini sağlar */
   padding: 12px 6px 18px;
 }
 
@@ -420,6 +450,7 @@ body.dark .slct option {
 .messageRow.user {
   justify-content: flex-end;
 }
+
 .messageRow.user .messageBubble {
   background: var(--bubble-user);
   color: var(--bubble-user-text);
@@ -435,13 +466,16 @@ body.dark .slct option {
 .messageBubble p {
   margin: 0 0 10px;
 }
+
 .messageBubble p:last-child {
   margin-bottom: 0;
 }
+
 .messageBubble a {
   color: color-mix(in srgb, var(--accent) 85%, white 15%);
   text-decoration: none;
 }
+
 .messageBubble a:hover {
   text-decoration: underline;
 }
@@ -463,6 +497,7 @@ body.dark .slct option {
   padding: 10px;
   overflow: auto;
 }
+
 .messageBubble pre code {
   background: transparent;
   border: none;
@@ -476,12 +511,10 @@ body.dark .slct option {
   z-index: 20;
   margin-top: 10px;
   padding-top: 10px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    color-mix(in srgb, var(--bg) 80%, transparent) 30%,
-    var(--bg) 65%
-  );
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      color-mix(in srgb, var(--bg) 80%, transparent) 30%,
+      var(--bg) 65%);
 }
 
 /* inner bar */
@@ -518,9 +551,11 @@ body.dark .slct option {
   border-radius: 12px;
   line-height: 1.35;
 }
+
 .composerTextarea::placeholder {
   color: var(--muted-2);
 }
+
 .composerTextarea:focus {
   border-color: color-mix(in srgb, var(--border) 40%, var(--accent) 30%);
   background: color-mix(in srgb, var(--surface) 86%, transparent);
@@ -548,21 +583,26 @@ body.dark .slct option {
   cursor: pointer;
   transition: transform 0.08s ease, background 0.2s ease, filter 0.2s ease;
 }
+
 .sendBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   filter: grayscale(0.2);
 }
+
 .sendBtn:hover:not(:disabled) {
   background: var(--accent-2);
 }
+
 .sendBtn:active:not(:disabled) {
   transform: translateY(1px);
 }
+
 .sendBtn:focus-visible {
   outline: none;
   box-shadow: var(--ring);
 }
+
 .sendBtn.stopMode {
   background: #9a2c2a49 !important;
 }
@@ -573,8 +613,15 @@ body.dark .slct option {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* attach button (optional) */
@@ -591,10 +638,12 @@ body.dark .slct option {
   cursor: pointer;
   transition: transform 0.08s ease, background 0.2s ease, border-color 0.2s ease;
 }
+
 .iconBtn:hover {
   background: color-mix(in srgb, var(--surface) 88%, var(--accent) 12%);
   border-color: color-mix(in srgb, var(--border) 72%, var(--accent) 28%);
 }
+
 .iconBtn:active {
   transform: translateY(1px);
 }
@@ -606,6 +655,7 @@ body.dark .slct option {
   gap: 10px;
   padding: 2px 1px 0;
 }
+
 .fileChip {
   display: inline-flex;
   align-items: center;
@@ -617,10 +667,12 @@ body.dark .slct option {
   font-size: 14px;
   color: var(--muted);
 }
+
 .fileChip strong {
   font-weight: 600;
   color: var(--text);
 }
+
 .fileChipRemove {
   width: 19px;
   height: 19px;
@@ -633,6 +685,7 @@ body.dark .slct option {
   align-items: center;
   justify-content: center;
 }
+
 .fileChipRemove:hover {
   border-color: var(--border-2);
 }
@@ -643,6 +696,7 @@ body.dark .slct option {
   flex-direction: column;
   gap: 4px;
 }
+
 .settingsCard {
   border: 1px solid var(--border);
   background: var(--surface);
@@ -652,13 +706,13 @@ body.dark .slct option {
 }
 
 .hd-title {
-  
-  color: var(--text);
-  font-size: 15px!  important;
-  font-weight: 600;
-  justify-self: center! important;
 
-  
+  color: var(--text);
+  font-size: 15px ! important;
+  font-weight: 600;
+  justify-self: center ! important;
+
+
 }
 
 .settingsTitle {
@@ -667,17 +721,19 @@ body.dark .slct option {
   color: var(--muted);
   margin-bottom: 8px;
 }
+
 .settingsRow {
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
 }
- 
+
 /* Status / error text */
 .statusText {
   font-size: 12px;
   color: var(--muted);
 }
+
 .errorText {
   font-size: 12px;
   color: color-mix(in srgb, var(--danger) 78%, white 22%);
@@ -695,18 +751,22 @@ body.dark .slct option {
   :root {
     --sidebar-w: 92vw;
   }
+
   .topbar {
     padding: 0 10px;
   }
+
   .menuBtn,
   .closeSidebarBtn {
     width: 38px;
     height: 38px;
     border-radius: 12px;
   }
+
   .composerInner {
     padding: 9px;
   }
+
   .messageBubble {
     border-radius: 14px;
     padding: 9px 11px;
@@ -729,56 +789,56 @@ Sidebar buttons: delete & rename (added icons, classes for styling)
 =================*/
 
 
-.btnnwchat{
-  all:unset;
+.btnnwchat {
+  all: unset;
 
-  display:flex;
-  align-items:center;
-  gap:8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-  padding:6px 10px;
+  padding: 6px 10px;
 
-  border-radius:8px;
+  border-radius: 8px;
 
-  cursor:pointer;
+  cursor: pointer;
 
-  color:var(--text);
+  color: var(--text);
 
-  transition:background .15s ease;
+  transition: background .15s ease;
 }
 
-.btnnwchat:hover{
-  color:var(--accent);
+.btnnwchat:hover {
+  color: var(--accent);
 }
 
-.btnnwchat svg{
-  width:18px;
-  height:18px;
+.btnnwchat svg {
+  width: 18px;
+  height: 18px;
 }
 
-.btnnwchat span{
-  font-size:11px;
-  font-weight:500;
+.btnnwchat span {
+  font-size: 11px;
+  font-weight: 500;
 }
 
 
 /* chat delete */
 
-.btnclose{
-  all:unset;
+.btnclose {
+  all: unset;
 
-  width:24px;
-  height:24px;
+  width: 24px;
+  height: 24px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  cursor:pointer;
+  cursor: pointer;
 
-  border-radius:6px;
+  border-radius: 6px;
 
-  color:var(--text-muted);
+  color: var(--text-muted);
 
   transition:
     background .15s ease,
@@ -787,33 +847,33 @@ Sidebar buttons: delete & rename (added icons, classes for styling)
 }
 
 
-.btnclose:active{
-  transform:scale(.9);
+.btnclose:active {
+  transform: scale(.9);
 }
 
-.btnclose svg{
-  width:16px;
-  height:16px;
+.btnclose svg {
+  width: 16px;
+  height: 16px;
 }
 
 
 /* rename */
 
-.btnrename{
-  all:unset;
+.btnrename {
+  all: unset;
 
-  width:24px;
-  height:24px;
+  width: 24px;
+  height: 24px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  cursor:pointer;
+  cursor: pointer;
 
-  border-radius:6px;
+  border-radius: 6px;
 
-  color:var(--text-muted);
+  color: var(--text-muted);
 
   transition:
     background .15s ease,
@@ -821,60 +881,61 @@ Sidebar buttons: delete & rename (added icons, classes for styling)
     transform .1s ease;
 }
 
-.btnrename:hover{
-  background:var(--surface-3);
-  color:var(--text);
+.btnrename:hover {
+  background: var(--surface-3);
+  color: var(--text);
 }
 
-.btnrename:active{
-  transform:scale(.9);
+.btnrename:active {
+  transform: scale(.9);
 }
 
-.btnrename svg{
-  width:16px;
-  height:16px;
+.btnrename svg {
+  width: 16px;
+  height: 16px;
 }
 
-.chatItem{
-  display:flex;
-  align-items:center;
+.chatItem {
+  display: flex;
+  align-items: center;
 
-  gap:1px;
+  gap: 1px;
 
-  padding:4px 1px;
+  padding: 4px 1px;
 
-  border-radius:8px;
+  border-radius: 8px;
 }
 
 /* chat title */
 
-.chatItem span{
-  flex:1;            /* SOLA YAPIŞTIRIR */
-  cursor:pointer;
+.chatItem span {
+  flex: 1;
+  /* SOLA YAPIŞTIRIR */
+  cursor: pointer;
 
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* icon buttons */
 
 .btnclose,
-.btnrename{
-  all:unset;
+.btnrename {
+  all: unset;
 
-  width:24px;
-  height:24px;
+  width: 24px;
+  height: 24px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  cursor:pointer;
+  cursor: pointer;
 
-  border-radius:6px;
+  border-radius: 6px;
 
-  color:var(--text-muted);
+  color: var(--text-muted);
 
   transition:
     background .15s ease,
@@ -883,66 +944,67 @@ Sidebar buttons: delete & rename (added icons, classes for styling)
 }
 
 .btnclose svg,
-.btnrename svg{
-  width:16px;
-  height:16px;
+.btnrename svg {
+  width: 16px;
+  height: 16px;
 }
 
-.btnclose:hover{
-  background:var(--surface-3);
-  color:#f31313;
+.btnclose:hover {
+  background: var(--surface-3);
+  color: #f31313;
 }
 
-.btnrename:hover{
-  background:var(--surface-3);
-  color:#ff7919;
+.btnrename:hover {
+  background: var(--surface-3);
+  color: #ff7919;
 }
 
 .btnclose:active,
-.btnrename:active{
-  transform:scale(.9);
+.btnrename:active {
+  transform: scale(.9);
 }
 
 
-.darklight{
-  all:unset;
- margin-right: -3px;
- margin-top:-15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.darklight {
+  all: unset;
+  margin-right: -3px;
+  margin-top: -15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  cursor:pointer;
+  cursor: pointer;
 
-  color:var(--text-muted);
+  color: var(--text-muted);
 
   transition:
     color .15s ease,
     transform .12s ease;
 }
-.darklight:hover svg{
-  transform:rotate(20deg);
-  
+
+.darklight:hover svg {
+  transform: rotate(20deg);
+
 }
 
 /* icon size */
 
-.darklight svg{
-  width:15px;
-  height:15px;
+.darklight svg {
+  width: 15px;
+  height: 15px;
   transition: transform 1s ease;
 }
 
 /* hover */
 
-.darklight:hover{
-  color:var(--text);
+.darklight:hover {
+  color: var(--text);
 }
 
 /* click */
 
-.darklight:active{
-  transform:scale(.9);
+.darklight:active {
+  transform: scale(.9);
 }
 
 
@@ -950,163 +1012,163 @@ Sidebar buttons: delete & rename (added icons, classes for styling)
 /* =========================================
 ANIMATION (theme.css uyumlu)
 ========================================= */
-.slider-wrapper{
-  font-family:"Montserrat-Alt1 ExtLt", sans-serif;
-  font-size:10px;
+.slider-wrapper {
+  font-family: "Montserrat-Alt1 ExtLt", sans-serif;
+  font-size: 10px;
   margin-right: 40%;
-  color:var(--muted);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:1px;
-  text-transform:uppercase;
-  
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  text-transform: uppercase;
+
   margin-top: -40px !important;
   margin-bottom: -10px !important;
 }
 
 /* visible window */
 
-.slider{
-  height:34px;
-  overflow:hidden;
-  position:relative;
-  color:var(--accent) ;
+.slider {
+  height: 34px;
+  overflow: hidden;
+  position: relative;
+  color: var(--accent);
 }
 
 /* words */
 
-.slider div{
-  height:34px;
-  line-height:34px;
-  padding:0 10px;
-  border-radius:8px;
-  font-weight:600;
+.slider div {
+  height: 34px;
+  line-height: 34px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-weight: 600;
 
-  display:block;
+  display: block;
 }
 
 /* animation container */
 
-.slider-text-1{
-  animation: slide 10s cubic-bezier(.4,0,.2,1) infinite;
+.slider-text-1 {
+  animation: slide 10s cubic-bezier(.4, 0, .2, 1) infinite;
 }
 
 /* animation */
 
-@keyframes slide{
+@keyframes slide {
 
-  0%{
-    margin-top:0;
+  0% {
+    margin-top: 0;
   }
 
-  30%{
-    margin-top:0;
+  30% {
+    margin-top: 0;
   }
 
-  35%{
-    margin-top:-34px;
+  35% {
+    margin-top: -34px;
   }
 
-  65%{
-    margin-top:-34px;
+  65% {
+    margin-top: -34px;
   }
 
-  70%{
-    margin-top:-68px;
+  70% {
+    margin-top: -68px;
   }
 
-  95%{
-    margin-top:-68px;
+  95% {
+    margin-top: -68px;
   }
 
-  100%{
-    margin-top:0;
+  100% {
+    margin-top: 0;
   }
 
 }
 
 /* HISTORY HEADER */
 
-.historyHeader{
-display:flex;
-justify-content:space-between;
-align-items:center;
-cursor:pointer;
-margin-bottom:6px;
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 6px;
 }
 
 /* CHEVRON */
 
-.chevron{
-transition:transform .3s ease;
-font-size:18px;
+.chevron {
+  transition: transform .3s ease;
+  font-size: 18px;
 }
 
-.chevron.rotate{
-transform:rotate(180deg);
+.chevron.rotate {
+  transform: rotate(180deg);
 }
 
 /* HISTORY CONTAINER */
 
-.historyContainer{
-max-height:0;
-overflow:hidden;
-transition:max-height .35s ease;
+.historyContainer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
 
 }
 
-.historyContainer.open{
-max-height:370px;
-margin-bottom: 10px;
-overflow:auto;
-   
+.historyContainer.open {
+  max-height: 370px;
+  margin-bottom: 10px;
+  overflow: auto;
+
 }
 
 /* CHAT ITEM */
 
-.chatItem{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:6px 8px;
-border-radius:6px;
-transition:background .2s;
+.chatItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background .2s;
 }
 
-.chatItem:hover{
-background:#2a2a2a;
+.chatItem:hover {
+  background: #2a2a2a;
 }
 
 /* CHAT TITLE */
 
-.chatTitle{
-cursor:pointer;
-flex:1;
+.chatTitle {
+  cursor: pointer;
+  flex: 1;
 }
 
 /* ACTION BUTTONS */
 
-.chatActions{
-display:flex;
-gap:6px;
-opacity:0;
-transition:opacity .2s;
+.chatActions {
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity .2s;
 }
 
-.chatItem:hover .chatActions{
-opacity:1;
+.chatItem:hover .chatActions {
+  opacity: 1;
 }
 
-.chatActions button{
-background:none;
-border:none;
-cursor:pointer;
-color:#ccc;
+.chatActions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
 }
 
-.chatActions button:hover{
-color:white;
+.chatActions button:hover {
+  color: white;
 }
 
 
@@ -1135,7 +1197,7 @@ color:white;
   margin-top: 1px;
 }
 
-.thinking > div {
+.thinking>div {
   background: var(--muted-2);
   height: 2px;
   width: 5px;
@@ -1144,16 +1206,45 @@ color:white;
   transform: translateY(-3px);
 }
 
-.thinking .dot1 { animation-delay: 0.0s; }
-.thinking .dot2 { animation-delay: 0.08s; }
-.thinking .dot3 { animation-delay: 0.16s; }
-.thinking .dot4 { animation-delay: 0.24s; }
-.thinking .dot5 { animation-delay: 0.32s; }
-.thinking .dot6 { animation-delay: 0.40s; }
-.thinking .dot7 { animation-delay: 0.48s; }
-.thinking .dot8 { animation-delay: 0.56s; }
-.thinking .dot9 { animation-delay: 0.64s; }
-.thinking .dot10 { animation-delay: 0.72s; }
+.thinking .dot1 {
+  animation-delay: 0.0s;
+}
+
+.thinking .dot2 {
+  animation-delay: 0.08s;
+}
+
+.thinking .dot3 {
+  animation-delay: 0.16s;
+}
+
+.thinking .dot4 {
+  animation-delay: 0.24s;
+}
+
+.thinking .dot5 {
+  animation-delay: 0.32s;
+}
+
+.thinking .dot6 {
+  animation-delay: 0.40s;
+}
+
+.thinking .dot7 {
+  animation-delay: 0.48s;
+}
+
+.thinking .dot8 {
+  animation-delay: 0.56s;
+}
+
+.thinking .dot9 {
+  animation-delay: 0.64s;
+}
+
+.thinking .dot10 {
+  animation-delay: 0.72s;
+}
 
 
 @keyframes loading7 {
@@ -1170,15 +1261,18 @@ color:white;
 /* Sidebar açıkken chat alanının kaymasını engelleyen ve ortalı tutan çözüm */
 
 @media (min-width: 1024px) {
+
   /* Masaüstünde tıklamaları engelleyen gölge katmanını pasif yapıyoruz */
   .app.appShell.sidebar-is-open .scrim {
-    background: rgba(0, 0, 0, 0); /* Görünmez yap */
-    pointer-events: none; /* Tıklamaları alta (chat alanına) geçir */
+    background: rgba(0, 0, 0, 0);
+    /* Görünmez yap */
+    pointer-events: none;
+    /* Tıklamaları alta (chat alanına) geçir */
   }
 
   /* Sidebar'ı olduğu gibi (fixed) bırakıyoruz, sadece gölgesini biraz yumuşatabiliriz */
   .app.appShell.sidebar-is-open .sidebar {
-    box-shadow: 10px 0 30px rgba(0,0,0,0.1); 
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
     z-index: 50;
   }
 
