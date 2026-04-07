@@ -26,11 +26,11 @@ export async function sendenChatMessage({
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `Sunucu hatası: ${response.status}`);
+      throw new Error(errorData.error || `SERVER fehler: ${response.status}`);
     }
 
     const data = await response.json();
-    return data.choices?.[0]?.message?.content || "Yanıt alınamadı.";
+    return data.choices?.[0]?.message?.content || "Keine Antwort";
   } catch (err) {
     if (err.name === "AbortError") {
       throw new Error("İşlem kullanıcı tarafından durduruldu.");

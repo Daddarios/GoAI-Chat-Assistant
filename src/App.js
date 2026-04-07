@@ -240,22 +240,22 @@ function deleteChat(id) {
         return next;
       });
     } catch (e) {
-      const msg = e?.message || "Hata oluştu";
+      const msg = e?.message || "Fehler aufgetreten";
       setMessages((prev) => {
         const next = [...prev];
         for (let i = next.length - 1; i >= 0; i--) {
           if (next[i].role === "assistant") {
-            next[i] = { role: "assistant", content: "Hata: " + msg };
+            next[i] = { role: "assistant", content: "Fehler: " + msg };
             break;
           }
         }
         return next;
       });
       setError(msg);
-      setStatus("Hata");
+      setStatus("Fehler aufgetreten");
     } finally {
       setIsSending(false);
-      setStatus("Hazır.");
+      setStatus("bereit.");
       abortRef.current = null;
     }
   }
@@ -306,7 +306,7 @@ function renameChat(id) {
     <button
       type="button"
       className="menuBtn"
-      aria-label="Ayarlar menüsünü aç/kapat"
+      aria-label="Display-Einstellungen öffnen/schließen"
       onClick={() => setSidebarOpen((v) => !v)}
     >
       <PiSidebarLight />

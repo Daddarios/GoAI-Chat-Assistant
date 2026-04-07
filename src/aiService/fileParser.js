@@ -34,7 +34,7 @@ export async function parseFile(file) {
     return null; 
   } catch (err) {
     console.error("Dosya okunurken hata oluştu:", name, err);
-    return `[Hata: ${name} dosyası okunamadı]`;
+    return `[Fehler: ${name} dosyası okunamadı]`;
   }
 }
 // PDF'ten metin ayıklama
