@@ -69,7 +69,7 @@ app.post("/chat", async (req, res) => {
 
     if (!response.ok || data.error) {
       return res.status(response.status || 400).json({
-        error: data?.error?.message || "OpenRouter API hatası",
+        error: data?.error?.message || "OpenRouter API fehlerhaft",
       });
     }
 
