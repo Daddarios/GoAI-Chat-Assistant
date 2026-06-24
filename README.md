@@ -53,7 +53,7 @@ Modern, hızlı ve çok fonksiyonlu bir yapay zeka deneyimi. **GoAI**, OpenRoute
 ### 🛠️ Teknoloji Yığını
 
 - **Frontend:** [React 19](https://react.dev), JavaScript (ES6+), HTML5, Vanilla CSS3.
-- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
+- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Fetch API (native), CORS, dotenv.
 - **Dosya İşleme:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
 - **AI Entegrasyonu:** [OpenRouter AI API](https://openrouter.ai).
 - **DevOps & Dağıtım:** Docker, GitHub Actions (CI/CD Pipeline), Hugging Face Spaces.
@@ -175,7 +175,7 @@ Eine moderne, schnelle und multifunktionale KI-Erfahrung. **GoAI** integriert di
 ### 🛠️ Technologie-Stack
 
 - **Frontend:** [React 19](https://react.dev), JavaScript (ES6+), HTML5, Vanilla CSS3.
-- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
+- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Fetch API (native), CORS, dotenv.
 - **Dateiverarbeitung:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
 - **API-Integration:** [OpenRouter AI API](https://openrouter.ai).
 - **DevOps & Deployment:** Docker, GitHub Actions (CI/CD Pipeline), Hugging Face Spaces.
@@ -297,7 +297,7 @@ A modern, fast, and multifunctional AI experience. **GoAI** integrates the most 
 ### 🛠️ Tech Stack
 
 - **Frontend:** [React 19](https://react.dev), JavaScript (ES6+), HTML5, Vanilla CSS3.
-- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Axios, CORS.
+- **Backend:** [Node.js](https://nodejs.org), [Express.js](https://expressjs.com), Fetch API (native), CORS, dotenv.
 - **File Processing:** [pdfjs-dist](https://mozilla.github.io/pdf.js/) (PDF), [xlsx](https://sheetjs.com) (Excel), [mammoth](https://github.com/mwilliamson/mammoth.js) (Word).
 - **API Integration:** [OpenRouter AI API](https://openrouter.ai).
 - **DevOps & Deployment:** Docker, GitHub Actions (CI/CD Pipeline), Hugging Face Spaces.
