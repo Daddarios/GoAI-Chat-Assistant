@@ -1,0 +1,30 @@
+name: Publish to Hugging Face Spaces
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v5
+
+      - name: Push to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "github-actions"
+
+          git clone https://Daddarios:$HF_TOKEN@huggingface.co/spaces/Daddarios/GoAI-Lab hf-space
+
+          # Temiz kopyalama (hf-space'in kendisini kopyalamaktan kaçın)
+          rsync -av --exclude='.git' --exclude='hf-space' . hf-space/
+
+          cd hf-space
+          git add .
+          git commit -m "Sync from GitHub" || echo "No changes"
+          git push origin main
