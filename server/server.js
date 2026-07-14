@@ -19,6 +19,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const API_KEY = process.env.OPENROUTER_API_KEY;
+console.log("API_KEY loaded:", API_KEY ? `yes (len=${API_KEY.length}, prefix=${API_KEY.slice(0, 8)})` : "NO - MISSING!");
 
 // Build varsa static yayınla
 if (fs.existsSync(buildPath)) {
@@ -27,6 +28,9 @@ if (fs.existsSync(buildPath)) {
 
 app.post("/chat", async (req, res) => {
   try {
+    if (!API_KEY) {
+      return res.status(500).json({ error: "OPENROUTER_API_KEY not configured on server" });
+    }
     const { model, systemPrompt, messages = [], userText } = req.body;
     const payloadMessages = [];
 
@@ -81,14 +85,16 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-// Sadece build varsa SPA fallback
+// Sadece build varsa SPA fallback (Express 5 uyumlu middleware)
 if (fs.existsSync(indexPath)) {
-  app.get(/.*/, (req, res) => {
+  app.use((req, res, next) => {
+    if (req.method !== "GET") return next();
+    if (req.path.startsWith("/chat")) return next();
     res.sendFile(indexPath);
   });
 }
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });

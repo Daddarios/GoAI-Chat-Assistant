@@ -83,6 +83,10 @@ Alles für
   <option value="nvidia/nemotron-3-super-120b-a12b:free">
     NVIDIA Nemotron 3
   </option>
+
+  <option value="nvidia/nemotron-3-ultra-550b-a55b:free">
+    NVIDIA Nemotron 3 Ultra
+  </option>
  {/*
  ERSATZ-MODELLE
    
